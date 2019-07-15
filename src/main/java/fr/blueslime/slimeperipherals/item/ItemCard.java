@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ItemCard extends Item
 {
-    private static final String DATA_NBT_KEY = "data";
+    private static final String DATA_NBT_KEY = "Data";
 
     public ItemCard(String type)
     {
@@ -45,14 +45,14 @@ public class ItemCard extends Item
                 items.add(new ItemStack(this, 1, i));
     }
 
-    public void setData(ItemStack stack, String data)
+    public static void setData(ItemStack stack, String data)
     {
         if (!stack.hasTagCompound())
             stack.setTagCompound(new NBTTagCompound());
         stack.getTagCompound().setString(DATA_NBT_KEY, data);
     }
 
-    public String getData(ItemStack stack)
+    public static String getData(ItemStack stack)
     {
         if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey(DATA_NBT_KEY))
             return null;

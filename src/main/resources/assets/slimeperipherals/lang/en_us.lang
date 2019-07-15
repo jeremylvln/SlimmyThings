@@ -9,6 +9,8 @@ itemGroup.slimeperipherals=Slime Peripherals
 # ----------------------------------------
 
 tile.slimeperipherals.magnetic_card_reader.name=Magnetic Card Reader
+tile.slimeperipherals.rfid_antenna.name=RFID Antenna
+tile.slimeperipherals.rfid_writer.name=RFID Writer
 
 # ----------------------------------------
 # Items

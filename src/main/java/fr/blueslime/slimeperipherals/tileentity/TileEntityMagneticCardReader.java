@@ -13,6 +13,9 @@ import net.minecraft.world.World;
 
 public class TileEntityMagneticCardReader extends TileEntityPeripheral implements ITickable
 {
+    private static final String STATE_NBT = "State";
+    private static final String DATA_TO_WRITE_NBT = "DataToWrite";
+
     private BlockMagneticCardReader.EnumState state = BlockMagneticCardReader.EnumState.IDLE;
     private String dataToWrite;
     private boolean dirtyState = true;
@@ -30,16 +33,15 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral implement
 
     public void onCardSwipe(EntityPlayer player, ItemStack stack)
     {
-        String cardData = ((ItemCard) stack.getItem()).getData(stack);
+        String cardData = ItemCard.getData(stack);
 
         if (this.state == BlockMagneticCardReader.EnumState.WAITING_CARD)
         {
-            System.out.println("SWIPED CARD '" + cardData + "'");
             this.pushEvent(new Object[] { player.getName(), cardData });
         }
         else if (this.state == BlockMagneticCardReader.EnumState.WAITING_CARD_WRITE)
         {
-            ((ItemCard) stack.getItem()).setData(stack, this.dataToWrite);
+            ItemCard.setData(stack, this.dataToWrite);
             this.state = BlockMagneticCardReader.EnumState.IDLE;
             this.dirtyState = true;
         }
@@ -68,10 +70,10 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral implement
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
         super.readFromNBT(nbtTagCompound);
-        this.state = BlockMagneticCardReader.EnumState.values()[nbtTagCompound.getInteger("state")];
+        this.state = BlockMagneticCardReader.EnumState.values()[nbtTagCompound.getInteger(STATE_NBT)];
 
         if (this.state == BlockMagneticCardReader.EnumState.WAITING_CARD_WRITE)
-            this.dataToWrite = nbtTagCompound.getString("dataToWrite");
+            this.dataToWrite = nbtTagCompound.getString(DATA_TO_WRITE_NBT);
 
         this.dirtyState = true;
     }
@@ -81,8 +83,10 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral implement
     {
         super.writeToNBT(nbtTagCompound);
 
+        nbtTagCompound.setInteger(STATE_NBT, this.state.ordinal());
+
         if (this.state == BlockMagneticCardReader.EnumState.WAITING_CARD_WRITE)
-            nbtTagCompound.setString("dataToWrite", this.dataToWrite);
+            nbtTagCompound.setString(DATA_TO_WRITE_NBT, this.dataToWrite);
 
         return nbtTagCompound;
     }

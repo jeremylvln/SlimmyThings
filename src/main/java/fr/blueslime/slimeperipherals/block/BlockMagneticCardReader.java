@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMagneticCardReader extends Block
 {
-    private static final PropertyEnum<EnumOrientation> ORIENTATION = PropertyEnum.create("facing", EnumOrientation.class);
+    public static final PropertyEnum<EnumOrientation> ORIENTATION = PropertyEnum.create("facing", EnumOrientation.class);
     public static final PropertyEnum<EnumState> STATE = PropertyEnum.create("state", EnumState.class);
 
     private static final AxisAlignedBB UP_X_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.25D, 0.625D, 0.15625D, 0.75D);
@@ -51,6 +51,9 @@ public class BlockMagneticCardReader extends Block
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
+        if (playerIn.isSneaking() || worldIn.isRemote)
+            return false;
+
         ItemStack itemStack = playerIn.getHeldItem(hand);
 
         if (!itemStack.isEmpty() && itemStack.getItem() == ModItems.MAGNETIC_CARD)
@@ -59,11 +62,9 @@ public class BlockMagneticCardReader extends Block
 
             if (tileEntity != null)
                 tileEntity.onCardSwipe(playerIn, itemStack);
-
-            return true;
         }
 
-        return false;
+        return true;
     }
 
     @Override
