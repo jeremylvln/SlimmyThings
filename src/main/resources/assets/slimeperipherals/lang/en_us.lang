@@ -1,0 +1,18 @@
+# ----------------------------------------
+# Creative tabs
+# ----------------------------------------
+
+itemGroup.slimeperipherals=Slime Peripherals
+
+# ----------------------------------------
+# Blocks
+# ----------------------------------------
+
+tile.slimeperipherals.magnetic_card_reader.name=Magnetic Card Reader
+
+# ----------------------------------------
+# Items
+# ----------------------------------------
+
+item.slimeperipherals.magnetic_card.name=Magnetic Card
+item.slimeperipherals.rfid_card.name=RFID Card

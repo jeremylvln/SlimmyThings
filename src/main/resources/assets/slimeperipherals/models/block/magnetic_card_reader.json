@@ -1,0 +1,119 @@
+{
+	"__comment": "Designed by IamBlueSlime with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "minecraft:blocks/iron_block",
+		"magnetic_card_reader": "slimeperipherals:blocks/magnetic_card_reader",
+		"green": "slimeperipherals:colors/green",
+		"orange": "slimeperipherals:colors/orange",
+		"red": "slimeperipherals:colors/red"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Base",
+			"from": [ 6, 0, 4 ],
+			"to": [ 10, 1, 12 ],
+			"faces": {
+				"down": { "uv": [ 0, 8, 4, 16 ], "texture": "#magnetic_card_reader" },
+				"up": { "uv": [ 0, 0, 4, 8 ], "texture": "#magnetic_card_reader" },
+				"north": { "uv": [ 8, 9, 12, 10 ], "texture": "#magnetic_card_reader" },
+				"south": { "uv": [ 12, 9, 16, 10 ], "texture": "#magnetic_card_reader" },
+				"west": { "uv": [ 6, 15, 14, 16 ], "texture": "#magnetic_card_reader" },
+				"east": { "uv": [ 6, 14, 14, 15 ], "texture": "#magnetic_card_reader" }
+			}
+		},
+		{
+			"__comment": "Base (little)",
+			"from": [ 6, 1, 4 ],
+			"to": [ 7, 2, 12 ],
+			"faces": {
+				"down": { "uv": [ 6, 6, 7, 14 ], "texture": "#magnetic_card_reader" },
+				"up": { "uv": [ 7, 6, 8, 14 ], "texture": "#magnetic_card_reader" },
+				"north": { "uv": [ 6, 5, 7, 6 ], "texture": "#magnetic_card_reader" },
+				"south": { "uv": [ 6, 4, 7, 5 ], "texture": "#magnetic_card_reader" },
+				"west": { "uv": [ 8, 11, 16, 12 ], "texture": "#magnetic_card_reader" },
+				"east": { "uv": [ 8, 10, 16, 11 ], "texture": "#magnetic_card_reader" }
+			}
+		},
+		{
+			"__comment": "Base (big)",
+			"from": [ 7.5, 1, 4 ],
+			"to": [ 10, 2, 12 ],
+			"faces": {
+				"down": { "uv": [ 4, 8, 6, 16 ], "texture": "#magnetic_card_reader" },
+				"up": { "uv": [ 4, 0, 6, 8 ], "texture": "#magnetic_card_reader" },
+				"north": { "uv": [ 14, 15, 16, 16 ], "texture": "#magnetic_card_reader" },
+				"south": { "uv": [ 14, 14, 16, 15 ], "texture": "#magnetic_card_reader" },
+				"west": { "uv": [ 8, 13, 16, 14 ], "texture": "#magnetic_card_reader" },
+				"east": { "uv": [ 8, 12, 16, 13 ], "texture": "#magnetic_card_reader" }
+			}
+		},
+		{
+			"__comment": "Green LED",
+			"from": [ 8.5, 2, 10.5 ],
+			"to": [ 9.5, 2.5, 11.5 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" }
+			}
+		},
+		{
+			"__comment": "Orange LED",
+			"from": [ 8.5, 2, 9 ],
+			"to": [ 9.5, 2.5, 10 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" }
+			}
+		},
+		{
+			"__comment": "Red LED",
+			"from": [ 8.5, 2, 7.5 ],
+			"to": [ 9.5, 2.5, 8.5 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#red" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#red" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#red" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#red" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#red" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#red" }
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation":  [ 91, 180, 0 ],
+			"translation":  [ 0, 2.7831, 7.6521 ]
+		},
+		"thirdperson_lefthand": {
+			"rotation":  [ 91, 180, 0 ],
+			"translation":  [ 0, 2.7831, 7.6521 ]
+		},
+		"firstperson_righthand": {
+			"rotation":  [ 75, 180, 0 ],
+			"translation":  [ 0, 2.5, 3 ]
+		},
+		"firstperson_lefthand": {
+			"rotation":  [ 75, 180, 0 ],
+			"translation":  [ 0, 2.5, 3 ]
+		},
+		"gui": {
+			"rotation":  [ 90, 180, 0 ]
+		},
+		"ground": {
+			"translation":  [ 0, 3.5, 0 ]
+		},
+		"fixed": {
+			"rotation":  [ -90, 0, 0 ],
+			"translation":  [ 0, 0, -6.26 ]
+		}
+	}
+}

@@ -1,0 +1,16 @@
+[
+{
+  "modid": "slimeperipherals",
+  "name": "Slime Peripherals",
+  "description": "An add-on for OpenComputers that provides new peripherals.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["IamBlueSlime"],
+  "credits": "Immibis for creating 'Immibis Peripherals'",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
