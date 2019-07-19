@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "PPP",
+    "RRR"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:paper",
+      "data": 0
+    },
+    "R": {
+      "item": "minecraft:redstone",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "slimeperipherals:rfid_card",
+    "data": 0,
+    "count": 1
+  }
+}

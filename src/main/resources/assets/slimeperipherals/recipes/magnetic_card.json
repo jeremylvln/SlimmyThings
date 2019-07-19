@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "IRI"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:paper",
+      "data": 0
+    },
+    "I": {
+      "item": "minecraft:iron_ingot",
+      "data": 0
+    },
+    "R": {
+      "item": "minecraft:redstone",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "slimeperipherals:magnetic_card",
+    "data": 0,
+    "count": 1
+  }
+}

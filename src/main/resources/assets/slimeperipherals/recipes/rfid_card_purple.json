@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "slimeperipherals:rfid_card",
+      "data": 0
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 5
+    }
+  ],
+  "result": {
+    "item": "slimeperipherals:rfid_card",
+    "data": 10,
+    "count": 1
+  }
+}

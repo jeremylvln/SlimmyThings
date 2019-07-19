@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "slimeperipherals:magnetic_card",
+      "data": 0
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 4
+    }
+  ],
+  "result": {
+    "item": "slimeperipherals:magnetic_card",
+    "data": 11,
+    "count": 1
+  }
+}
