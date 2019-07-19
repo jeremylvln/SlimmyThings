@@ -4,6 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'env'
+                sh 'chmod +x ./gradlew'
                 sh './gradlew build --refresh-dependencies --stacktrace'
             }
         }
