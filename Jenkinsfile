@@ -1,4 +1,5 @@
 pipeline {
+    agent { docker { image 'openjdk:8-alpine' } }
     stages {
         stage('Build') {
             steps {
