@@ -1,9 +1,11 @@
 package fr.blueslime.slimeperipherals.init;
 
 import fr.blueslime.slimeperipherals.SlimePeripherals;
+import fr.blueslime.slimeperipherals.block.BlockElectronicLock;
 import fr.blueslime.slimeperipherals.block.BlockMagneticCardReader;
 import fr.blueslime.slimeperipherals.block.BlockRFIDAntenna;
 import fr.blueslime.slimeperipherals.block.BlockRFIDWriter;
+import fr.blueslime.slimeperipherals.tileentity.TileEntityElectronicLock;
 import fr.blueslime.slimeperipherals.tileentity.TileEntityMagneticCardReader;
 import fr.blueslime.slimeperipherals.tileentity.TileEntityRFIDAntenna;
 import fr.blueslime.slimeperipherals.tileentity.TileEntityRFIDWriter;
@@ -32,6 +34,7 @@ public class ModBlocks
     public static final Block MAGNETIC_CARD_READER = new BlockMagneticCardReader();
     public static final Block RFID_ANTENNA = new BlockRFIDAntenna();
     public static final Block RFID_WRITER = new BlockRFIDWriter();
+    public static final Block ELECTRONIC_LOCK = new BlockElectronicLock();
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -39,6 +42,7 @@ public class ModBlocks
         registerBlock(event, MAGNETIC_CARD_READER, TileEntityMagneticCardReader.class);
         registerBlock(event, RFID_ANTENNA, TileEntityRFIDAntenna.class);
         registerBlock(event, RFID_WRITER, TileEntityRFIDWriter.class);
+        registerBlock(event, ELECTRONIC_LOCK, TileEntityElectronicLock.class);
     }
 
     @SubscribeEvent

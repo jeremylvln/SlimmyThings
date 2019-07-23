@@ -11,6 +11,7 @@ itemGroup.slimeperipherals=Slime Peripherals
 tile.slimeperipherals.magnetic_card_reader.name=Magnetic Card Reader
 tile.slimeperipherals.rfid_antenna.name=RFID Antenna
 tile.slimeperipherals.rfid_writer.name=RFID Writer
+tile.slimeperipherals.electronic_lock.name=Electronic Lock
 
 # ----------------------------------------
 # Items
@@ -18,3 +19,4 @@ tile.slimeperipherals.rfid_writer.name=RFID Writer
 
 item.slimeperipherals.magnetic_card.name=Magnetic Card
 item.slimeperipherals.rfid_card.name=RFID Card
+item.slimeperipherals.electronic_pad.name=Electronic Pad

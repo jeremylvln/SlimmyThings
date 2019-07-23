@@ -18,11 +18,12 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral implement
 
     private BlockMagneticCardReader.EnumState state = BlockMagneticCardReader.EnumState.IDLE;
     private String dataToWrite;
+
     private boolean dirtyState = true;
 
     public TileEntityMagneticCardReader()
     {
-        this.setHasEventQueue(true);
+        this.setHasEventQueue();
 
         this.computerMethodRegistry.register("readData", this::onMethodReadData);
         this.computerMethodRegistry.register("writeData", this::onMethodWriteData);
@@ -97,6 +98,7 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral implement
         return "magnetic_card_reader";
     }
 
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodReadData(Object[] args)
     {
         this.state = BlockMagneticCardReader.EnumState.WAITING_CARD;
@@ -134,6 +136,7 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral implement
         return new Object[0];
     }
 
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodGetState(Object[] args)
     {
         return new Object[] { this.state.getName() };

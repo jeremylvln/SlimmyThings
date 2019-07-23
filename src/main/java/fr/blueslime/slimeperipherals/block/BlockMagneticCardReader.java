@@ -10,6 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.EnumFaceDirection;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -168,25 +169,32 @@ public class BlockMagneticCardReader extends Block
 
     public enum EnumOrientation implements IStringSerializable
     {
-        DOWN_NORTH("down_north"),
-        DOWN_EAST("down_east"),
-        DOWN_SOUTH("down_south"),
-        DOWN_WEST("down_west"),
-        NORTH("north"),
-        EAST("east"),
-        SOUTH("south"),
-        WEST("west"),
-        UP_NORTH("up_north"),
-        UP_EAST("up_east"),
-        UP_SOUTH("up_south"),
-        UP_WEST("up_west");
+        DOWN_NORTH("down_north", true),
+        DOWN_EAST("down_east", true),
+        DOWN_SOUTH("down_south", true),
+        DOWN_WEST("down_west", true),
+        NORTH("north", false),
+        EAST("east", false),
+        SOUTH("south", false),
+        WEST("west", false),
+        UP_NORTH("up_north", true),
+        UP_EAST("up_east", true),
+        UP_SOUTH("up_south", true),
+        UP_WEST("up_west", true);
 
         private static final EnumOrientation[] META_LOOKUP = new EnumOrientation[values().length];
         private final String name;
+        private final boolean horizontal;
 
-        EnumOrientation(String name)
+        EnumOrientation(String name, boolean horizontal)
         {
             this.name = name;
+            this.horizontal = horizontal;
+        }
+
+        public boolean isHorizontal()
+        {
+            return this.horizontal;
         }
 
         public String toString()

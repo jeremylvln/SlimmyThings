@@ -1,7 +1,7 @@
 package fr.blueslime.slimeperipherals.tileentity;
 
-import fr.blueslime.slimeperipherals.common.ComputerMethodRegistry;
-import fr.blueslime.slimeperipherals.common.IComputerIntegration;
+import fr.blueslime.slimeperipherals.integration.computer.ComputerMethodRegistry;
+import fr.blueslime.slimeperipherals.integration.computer.IComputerIntegration;
 import net.minecraft.tileentity.TileEntity;
 
 import java.util.Queue;
@@ -23,18 +23,10 @@ public abstract class TileEntityPeripheral extends TileEntity implements IComput
         this.queuedEvents.add(payload);
     }
 
-    protected void setHasEventQueue(boolean flag)
+    protected void setHasEventQueue()
     {
-        if (!flag)
-        {
-            this.computerMethodRegistry.remove("pollEvent");
-            this.computerMethodRegistry.remove("hasEvent");
-        }
-        else
-        {
-            this.computerMethodRegistry.register("pollEvent", this::onMethodPollEvent);
-            this.computerMethodRegistry.register("hasEvent", this::onMethodHasEvent);
-        }
+        this.computerMethodRegistry.register("pollEvent", this::onMethodPollEvent);
+        this.computerMethodRegistry.register("hasEvent", this::onMethodHasEvent);
     }
 
     @Override
@@ -51,6 +43,7 @@ public abstract class TileEntityPeripheral extends TileEntity implements IComput
         return this.queuedEvents.poll();
     }
 
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodHasEvent(Object[] args)
     {
         return new Object[] { !this.queuedEvents.isEmpty() };

@@ -1,8 +1,8 @@
 package fr.blueslime.slimeperipherals;
 
-import fr.blueslime.slimeperipherals.common.OpenComputersDriver;
+import fr.blueslime.slimeperipherals.common.CommonProxy;
+import fr.blueslime.slimeperipherals.init.ModIntegrations;
 import fr.blueslime.slimeperipherals.init.ModItems;
-import li.cil.oc.api.Driver;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -10,7 +10,9 @@ import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +29,9 @@ public class SlimePeripherals
     @Mod.Instance
     public static SlimePeripherals INSTANCE;
 
+    @SidedProxy(serverSide = "fr.blueslime.slimeperipherals.common.CommonProxy", clientSide = "fr.blueslime.slimeperipherals.client.ClientProxy")
+    public static CommonProxy PROXY;
+
     public static CreativeTabs TAB = new CreativeTabs(MODID)
     {
         @Override
@@ -42,12 +47,20 @@ public class SlimePeripherals
         LOGGER = event.getModLog();
 
         MinecraftForge.EVENT_BUS.register(this);
+        PROXY.preInit();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        Driver.add(new OpenComputersDriver());
+        ModIntegrations.init();
+        PROXY.init();
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event)
+    {
+        PROXY.postInit();
     }
 
     @SubscribeEvent

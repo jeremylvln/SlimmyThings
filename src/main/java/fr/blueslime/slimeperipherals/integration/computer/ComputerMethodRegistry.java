@@ -1,4 +1,4 @@
-package fr.blueslime.slimeperipherals.common;
+package fr.blueslime.slimeperipherals.integration.computer;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

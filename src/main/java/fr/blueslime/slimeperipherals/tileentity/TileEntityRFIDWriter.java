@@ -49,15 +49,14 @@ public class TileEntityRFIDWriter extends TileEntityPeripheral implements ITicka
         this.dirtyState = true;
     }
 
-    public boolean onCardTake()
+    public void onCardTake()
     {
         if (this.state == BlockRFIDWriter.EnumState.BUSY || this.currentStack.isEmpty())
-            return false;
+            return;
 
         InventoryHelper.spawnItemStack(this.world, this.pos.getX() + 0.5D, this.pos.getY(), this.pos.getZ() + 0.5D, this.currentStack);
         this.currentStack = ItemStack.EMPTY;
         this.dirtyState = true;
-        return true;
     }
 
     public void onBlockBreak()
@@ -158,11 +157,13 @@ public class TileEntityRFIDWriter extends TileEntityPeripheral implements ITicka
         return new Object[0];
     }
 
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodGetProgress(Object[] args)
     {
         return new Object[] { this.operationTicks, TICKS_NEEDED_TO_WRITE };
     }
 
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodGetState(Object[] args)
     {
         return new Object[] { this.state.getName() };

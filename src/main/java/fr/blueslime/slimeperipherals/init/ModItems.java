@@ -2,6 +2,7 @@ package fr.blueslime.slimeperipherals.init;
 
 import fr.blueslime.slimeperipherals.SlimePeripherals;
 import fr.blueslime.slimeperipherals.item.ItemCard;
+import fr.blueslime.slimeperipherals.item.ItemElectronicPad;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
@@ -18,12 +19,14 @@ public class ModItems
 {
     public static final Item MAGNETIC_CARD = new ItemCard("magnetic");
     public static final Item RFID_CARD = new ItemCard("rfid");
+    public static final Item ELECTRONIC_PAD = new ItemElectronicPad();
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         event.getRegistry().register(MAGNETIC_CARD);
         event.getRegistry().register(RFID_CARD);
+        event.getRegistry().register(ELECTRONIC_PAD);
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,6 +38,8 @@ public class ModItems
             registerModel(MAGNETIC_CARD, color.getMetadata(), color.getUnlocalizedName());
             registerModel(RFID_CARD, color.getMetadata(), color.getUnlocalizedName());
         }
+
+        registerModel(ELECTRONIC_PAD, 0, null, false);
     }
 
     @SideOnly(Side.CLIENT)
@@ -52,8 +57,17 @@ public class ModItems
     @SideOnly(Side.CLIENT)
     private static void registerModel(Item item, int metadata, String metadataName)
     {
+        registerModel(item, metadata, metadataName, true);
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static void registerModel(Item item, int metadata, String metadataName, boolean specialName)
+    {
         String resourceName = item.getUnlocalizedName().substring(5).replace('.', ':');
-        resourceName += "_" + (metadataName != null ? metadataName : metadata);
+
+        if (specialName)
+            resourceName += "_" + (metadataName != null ? metadataName : metadata);
+
         ModelLoader.setCustomModelResourceLocation(item, metadata, new ModelResourceLocation(resourceName, "inventory"));
     }
 }

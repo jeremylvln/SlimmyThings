@@ -11,7 +11,7 @@ public class TileEntityRFIDAntenna extends TileEntityPeripheral
 
     public TileEntityRFIDAntenna()
     {
-        this.setHasEventQueue(true);
+        this.setHasEventQueue();
         this.computerMethodRegistry.register("scan", this::onMethodScan);
     }
 
@@ -21,6 +21,7 @@ public class TileEntityRFIDAntenna extends TileEntityPeripheral
         return "rfid_antenna";
     }
 
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodScan(Object[] args)
     {
         this.world.playerEntities.stream().filter(EntitySelectors.NOT_SPECTATING::apply).forEach(entityPlayer ->
