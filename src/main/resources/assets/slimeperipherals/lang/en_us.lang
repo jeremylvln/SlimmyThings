@@ -20,3 +20,8 @@ tile.slimeperipherals.electronic_lock.name=Electronic Lock
 item.slimeperipherals.magnetic_card.name=Magnetic Card
 item.slimeperipherals.rfid_card.name=RFID Card
 item.slimeperipherals.electronic_pad.name=Electronic Pad
+
+# ----------------------------------------
+# Peripheral phrases
+# ----------------------------------------
+slimeperipherals.peripheral.access_refused=You don't have the permission to modify this peripheral.

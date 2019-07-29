@@ -1,6 +1,10 @@
 package fr.blueslime.slimeperipherals.block;
 
 import fr.blueslime.slimeperipherals.SlimePeripherals;
+import fr.blueslime.slimeperipherals.init.ModBlocks;
+import fr.blueslime.slimeperipherals.init.ModItems;
+import fr.blueslime.slimeperipherals.logic.electroniclock.ElectronicPadData;
+import fr.blueslime.slimeperipherals.logic.electroniclock.ElectronicPadEntry;
 import fr.blueslime.slimeperipherals.tileentity.TileEntityElectronicLock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -9,6 +13,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,11 +21,19 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.GetCollisionBoxesEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@Mod.EventBusSubscriber(modid = SlimePeripherals.MODID)
 public class BlockElectronicLock extends Block
 {
     public static final PropertyEnum<BlockMagneticCardReader.EnumOrientation> ORIENTATION = BlockMagneticCardReader.ORIENTATION;
@@ -52,8 +65,18 @@ public class BlockElectronicLock extends Block
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if (playerIn.isSneaking() || worldIn.isRemote)
+        if (worldIn.isRemote)
             return true;
+
+        TileEntityElectronicLock tileEntity = (TileEntityElectronicLock) worldIn.getTileEntity(pos);
+
+        if (tileEntity == null)
+            return true;
+
+        if (playerIn.isSneaking())
+            tileEntity.onPadMovement(playerIn, playerIn.getHeldItem(hand));
+        else
+            tileEntity.onPlayerInteract(playerIn, hitX, hitY, hitZ);
 
         return true;
     }
@@ -166,6 +189,32 @@ public class BlockElectronicLock extends Block
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, ORIENTATION, STATE);
+    }
+
+    @SubscribeEvent
+    public static void onPlayerInteract(PlayerInteractEvent.RightClickBlock event)
+    {
+        if (event.getWorld().getBlockState(event.getPos()).getBlock() == ModBlocks.ELECTRONIC_LOCK)
+            if (event.getEntityPlayer().isSneaking() && event.getItemStack().getItem() == ModItems.ELECTRONIC_PAD)
+                event.setUseBlock(Event.Result.ALLOW);
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public static void onGetCollisionBoxes(GetCollisionBoxesEvent event)
+    {
+        Minecraft mc = Minecraft.getMinecraft();
+
+        if (mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == RayTraceResult.Type.BLOCK)
+        {
+            BlockPos pos = mc.objectMouseOver.getBlockPos();
+            IBlockState blockState = event.getWorld().getBlockState(pos);
+
+            if (blockState.getBlock() instanceof BlockElectronicLock)
+                for (int i = 0; i < ElectronicPadData.ENTRIES_NB; i += 1)
+                    event.getCollisionBoxesList().add(ElectronicPadEntry.getEntryAABB(pos.getX(), pos.getY(), pos.getZ(), i,
+                            blockState.getValue(BlockElectronicLock.ORIENTATION)));
+        }
     }
 
     public enum EnumState implements IStringSerializable

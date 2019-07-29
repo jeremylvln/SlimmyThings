@@ -3,6 +3,7 @@ package fr.blueslime.slimeperipherals.logic.electroniclock;
 import fr.blueslime.slimeperipherals.block.BlockMagneticCardReader;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -10,7 +11,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class ElectronicPadEntry implements INBTSerializable<NBTTagCompound>, IStringSerializable
 {
-    public static final String TYPE_NBT = "Type";
+    public enum Type { CHARACTER, ITEM_STACK }
+
+    private static final String TYPE_NBT = "Type";
     private static final String PAD_POSITION_NBT = "PadPosition";
 
     protected Type type;
@@ -59,6 +62,15 @@ public abstract class ElectronicPadEntry implements INBTSerializable<NBTTagCompo
     {
         Vec3d relative = getRelativeFromOrientation(padPosition, orientation);
         return new Vec3d(x + relative.x, y + relative.y, z + relative.z);
+    }
+
+    public static AxisAlignedBB getEntryAABB(double x, double y, double z, int padPosition, BlockMagneticCardReader.EnumOrientation orientation)
+    {
+        AxisAlignedBB aabb = getRelativeEntryAABB(padPosition, orientation);
+        return new AxisAlignedBB(
+                aabb.minX + x, aabb.minY + y, aabb.minZ + z,
+                aabb.maxX + x, aabb.maxY + y, aabb.maxZ + z
+        );
     }
 
     private static Vec3d getRelativeFromOrientation(int padPosition, BlockMagneticCardReader.EnumOrientation orientation)
@@ -145,8 +157,25 @@ public abstract class ElectronicPadEntry implements INBTSerializable<NBTTagCompo
         throw new IllegalStateException("Invalid orientation");
     }
 
-    public enum Type
+    private static AxisAlignedBB getRelativeEntryAABB(int padPosition, BlockMagneticCardReader.EnumOrientation orientation)
     {
-        CHARACTER, ITEM_STACK
+        Vec3d relative = getRelativeFromOrientation(padPosition, orientation);
+        return new AxisAlignedBB(
+                relative.x - 0.03125D, relative.y - 0.03125D, relative.z - 0.03125D,
+                relative.x + 0.03125D, relative.y + 0.03125D, relative.z + 0.03125D
+        );
+    }
+
+    public static int getPadPositionFromHitPoint(float hitX, float hitY, float hitZ, BlockMagneticCardReader.EnumOrientation orientation)
+    {
+        for (int i = 0; i < ElectronicPadData.ENTRIES_NB; i += 1)
+        {
+            AxisAlignedBB buttonCube = getRelativeEntryAABB(i, orientation);
+
+            if (buttonCube.contains(new Vec3d(hitX, hitY, hitZ)))
+                return i;
+        }
+
+        return -1;
     }
 }

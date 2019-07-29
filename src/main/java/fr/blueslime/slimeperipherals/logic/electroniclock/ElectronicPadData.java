@@ -3,7 +3,6 @@ package fr.blueslime.slimeperipherals.logic.electroniclock;
 import fr.blueslime.slimeperipherals.block.BlockMagneticCardReader;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -62,7 +61,8 @@ public class ElectronicPadData implements INBTSerializable<NBTTagList>
     @Override
     public void deserializeNBT(NBTTagList nbtTagList)
     {
-        for (int i = 0; i < ENTRIES_NB; i += 1) {
+        for (int i = 0; i < ENTRIES_NB; i += 1)
+        {
             this.entries[i] = ElectronicPadEntry.byType(nbtTagList.getCompoundTagAt(i));
 
             if (this.entries[i] == null)

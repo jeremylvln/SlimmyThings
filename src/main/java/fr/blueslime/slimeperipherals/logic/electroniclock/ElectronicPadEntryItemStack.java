@@ -4,7 +4,6 @@ import fr.blueslime.slimeperipherals.block.BlockMagneticCardReader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,8 +14,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ElectronicPadEntryItemStack extends ElectronicPadEntry
 {
     private static final String STACK_NBT = "Item";
-
-    private final RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
 
     private ItemStack stack;
 
@@ -56,6 +53,7 @@ public class ElectronicPadEntryItemStack extends ElectronicPadEntry
         return this.stack.getDisplayName();
     }
 
+    @SideOnly(Side.CLIENT)
     static void renderItemStack(ItemStack stack, int padPosition, double x, double y, double z, BlockMagneticCardReader.EnumOrientation orientation)
     {
         Vec3d renderPosition = getPositionWithOrientation(x, y, z, padPosition, orientation);
