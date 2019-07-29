@@ -1,4 +1,4 @@
-# Slime Peripherals [![Build Status](https://img.shields.io/jenkins/s/https/ci.jeremylvln.fr/job/Slime%20Peripherals.svg?style=flat-square)](https://ci.jeremylvln.fr/job/Slime%20Peripherals/) [![CurseForge Downloads](http://cf.way2muchnoise.eu/full_328259_downloads.svg)](https://minecraft.curseforge.com/projects/slime-peripherals) [![Minecraft Versions](http://cf.way2muchnoise.eu/versions/328259.svg)](https://minecraft.curseforge.com/projects/slime-peripherals)
+# Slime Peripherals [![Build Status](https://img.shields.io/jenkins/s/https/ci.jeremylvln.fr/job/Slime%20Peripherals.svg?style=flat-square)](https://ci.jeremylvln.fr/job/Slime%20Peripherals/) [![CurseForge Downloads](http://cf.way2muchnoise.eu/full_328259_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/slime-peripherals) [![Minecraft Versions](http://cf.way2muchnoise.eu/versions/328259.svg)](https://www.curseforge.com/minecraft/mc-mods/slime-peripherals)
 
 
 ![Overview](.github/overview.png)
