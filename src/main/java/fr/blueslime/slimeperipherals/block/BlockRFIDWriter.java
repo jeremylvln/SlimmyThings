@@ -2,9 +2,7 @@ package fr.blueslime.slimeperipherals.block;
 
 import fr.blueslime.slimeperipherals.SlimePeripherals;
 import fr.blueslime.slimeperipherals.init.ModItems;
-import fr.blueslime.slimeperipherals.tileentity.TileEntityMagneticCardReader;
 import fr.blueslime.slimeperipherals.tileentity.TileEntityRFIDWriter;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -14,7 +12,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -25,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRFIDWriter extends Block
+public class BlockRFIDWriter extends BlockPeripheral
 {
     private static final PropertyEnum<BlockMagneticCardReader.EnumOrientation> ORIENTATION = BlockMagneticCardReader.ORIENTATION;
     public static final PropertyEnum<EnumState> STATE = PropertyEnum.create("state", EnumState.class);

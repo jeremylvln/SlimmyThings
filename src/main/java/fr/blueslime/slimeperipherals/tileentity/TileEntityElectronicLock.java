@@ -18,7 +18,6 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import java.util.UUID;
@@ -26,11 +25,9 @@ import java.util.UUID;
 public class TileEntityElectronicLock extends TileEntityPeripheral implements ITickable
 {
     private static final String STATE_NBT = "State";
-    private static final String OWNER_NBT = "Owner";
     private static final String PAD_NBT = "Pad";
 
     private BlockElectronicLock.EnumState state = BlockElectronicLock.EnumState.IDLE;
-    private UUID owner = null;
     private ItemStack pad = ItemStack.EMPTY;
     private ElectronicPadData padData = null;
 
@@ -66,11 +63,8 @@ public class TileEntityElectronicLock extends TileEntityPeripheral implements IT
 
     public void onPadMovement(EntityPlayer player, ItemStack stack)
     {
-        if (player.getUniqueID() != this.owner)
-        {
-            player.sendMessage(new TextComponentTranslation("slimeperipherals.peripheral.access_refused"));
+        if (!this.assertInteractWithSecurity(player))
             return;
-        }
 
         if (!this.pad.isEmpty())
         {
@@ -119,7 +113,6 @@ public class TileEntityElectronicLock extends TileEntityPeripheral implements IT
     {
         super.readFromNBT(nbtTagCompound);
         this.state = BlockElectronicLock.EnumState.values()[nbtTagCompound.getInteger(STATE_NBT)];
-        this.owner = UUID.fromString(nbtTagCompound.getString(OWNER_NBT));
 
         if (nbtTagCompound.hasKey(PAD_NBT))
         {
@@ -135,7 +128,6 @@ public class TileEntityElectronicLock extends TileEntityPeripheral implements IT
     {
         super.writeToNBT(nbtTagCompound);
         nbtTagCompound.setInteger(STATE_NBT, this.state.ordinal());
-        nbtTagCompound.setString(OWNER_NBT, this.owner.toString());
 
         if (!this.pad.isEmpty())
             nbtTagCompound.setTag(PAD_NBT, this.pad.writeToNBT(new NBTTagCompound()));

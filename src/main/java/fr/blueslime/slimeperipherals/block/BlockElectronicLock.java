@@ -6,7 +6,6 @@ import fr.blueslime.slimeperipherals.init.ModItems;
 import fr.blueslime.slimeperipherals.logic.electroniclock.ElectronicPadData;
 import fr.blueslime.slimeperipherals.logic.electroniclock.ElectronicPadEntry;
 import fr.blueslime.slimeperipherals.tileentity.TileEntityElectronicLock;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -22,7 +21,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -34,7 +32,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod.EventBusSubscriber(modid = SlimePeripherals.MODID)
-public class BlockElectronicLock extends Block
+public class BlockElectronicLock extends BlockPeripheral
 {
     public static final PropertyEnum<BlockMagneticCardReader.EnumOrientation> ORIENTATION = BlockMagneticCardReader.ORIENTATION;
     public static final PropertyEnum<EnumState> STATE = PropertyEnum.create("state", EnumState.class);
@@ -79,17 +77,6 @@ public class BlockElectronicLock extends Block
             tileEntity.onPlayerInteract(playerIn, hitX, hitY, hitZ);
 
         return true;
-    }
-
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-    {
-        TileEntityElectronicLock tileEntity = (TileEntityElectronicLock) worldIn.getTileEntity(pos);
-
-        if (tileEntity == null)
-            return;
-
-        tileEntity.setOwner(placer.getUniqueID());
     }
 
     @Override

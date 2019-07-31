@@ -3,14 +3,12 @@ package fr.blueslime.slimeperipherals.block;
 import fr.blueslime.slimeperipherals.SlimePeripherals;
 import fr.blueslime.slimeperipherals.init.ModItems;
 import fr.blueslime.slimeperipherals.tileentity.TileEntityMagneticCardReader;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.EnumFaceDirection;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMagneticCardReader extends Block
+public class BlockMagneticCardReader extends BlockPeripheral
 {
     public static final PropertyEnum<EnumOrientation> ORIENTATION = PropertyEnum.create("facing", EnumOrientation.class);
     public static final PropertyEnum<EnumState> STATE = PropertyEnum.create("state", EnumState.class);
