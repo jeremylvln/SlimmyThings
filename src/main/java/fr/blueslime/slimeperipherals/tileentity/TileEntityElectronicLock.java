@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 import java.util.UUID;
 
-public class TileEntityElectronicLock extends TileEntityPeripheral implements ITickable
+public class TileEntityElectronicLock extends TileEntityPeripheral
 {
     private static final String STATE_NBT = "State";
     private static final String PAD_NBT = "Pad";
@@ -92,6 +92,8 @@ public class TileEntityElectronicLock extends TileEntityPeripheral implements IT
     @Override
     public void update()
     {
+        super.update();
+
         if (this.dirtyState)
         {
             IBlockState blockState = this.world.getBlockState(this.pos);

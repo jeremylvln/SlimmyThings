@@ -11,7 +11,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileEntityMagneticCardReader extends TileEntityPeripheral implements ITickable
+public class TileEntityMagneticCardReader extends TileEntityPeripheral
 {
     private static final String STATE_NBT = "State";
     private static final String DATA_TO_WRITE_NBT = "DataToWrite";
@@ -51,6 +51,8 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral implement
     @Override
     public void update()
     {
+        super.update();
+
         if (this.dirtyState)
         {
             IBlockState blockState = this.world.getBlockState(this.pos);

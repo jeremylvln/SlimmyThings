@@ -9,7 +9,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public abstract class TileEntityPoweredPeripheral extends TileEntityPeripheral implements ITickable
+public abstract class TileEntityPoweredPeripheral extends TileEntityPeripheral
 {
     private static final String ENERGY_STORAGE_NBT = "Energy";
 
@@ -25,6 +25,8 @@ public abstract class TileEntityPoweredPeripheral extends TileEntityPeripheral i
     @Override
     public void update()
     {
+        super.update();
+
         for (EnumFacing face : EnumFacing.VALUES)
         {
             TileEntity tile = this.world.getTileEntity(this.pos.offset(face));

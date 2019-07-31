@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public abstract class BlockPeripheral extends Block
 {
-    public BlockPeripheral(Material materialIn)
+    BlockPeripheral(Material materialIn)
     {
         super(materialIn);
     }

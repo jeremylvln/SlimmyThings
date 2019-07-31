@@ -69,6 +69,8 @@ public class TileEntityRFIDWriter extends TileEntityPeripheral implements ITicka
     @Override
     public void update()
     {
+        super.update();
+
         if (this.state == BlockRFIDWriter.EnumState.WAITING_CARD && !this.currentStack.isEmpty())
         {
             this.state = BlockRFIDWriter.EnumState.BUSY;
