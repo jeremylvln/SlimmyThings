@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -24,6 +23,8 @@ import java.util.UUID;
 
 public class TileEntityElectronicLock extends TileEntityPeripheral
 {
+    public static final String PERIPHERAL_NAME = "electronic_lock";
+
     private static final String STATE_NBT = "State";
     private static final String PAD_NBT = "Pad";
 
@@ -183,7 +184,7 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
     @Override
     public String getComputerName()
     {
-        return "electronic_lock";
+        return PERIPHERAL_NAME;
     }
 
     @SuppressWarnings({ "unused" })

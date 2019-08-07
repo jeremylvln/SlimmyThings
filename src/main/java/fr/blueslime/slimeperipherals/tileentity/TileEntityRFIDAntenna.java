@@ -22,6 +22,7 @@ public class TileEntityRFIDAntenna extends TileEntityPeripheral
     }
 
     @SuppressWarnings({ "unused "})
+
     private Object[] onMethodScan(Object[] args)
     {
         this.world.playerEntities.stream().filter(EntitySelectors.NOT_SPECTATING::apply).forEach(entityPlayer ->
