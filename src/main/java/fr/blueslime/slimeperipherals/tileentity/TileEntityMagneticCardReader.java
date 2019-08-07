@@ -26,6 +26,7 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral
 
         this.computerMethodRegistry.register("readData", this::onMethodReadData);
         this.computerMethodRegistry.register("writeData", this::onMethodWriteData);
+        this.computerMethodRegistry.register("setIdle", this::onMethodSetIdle);
         this.computerMethodRegistry.register("setBusy", this::onMethodSetBusy);
         this.computerMethodRegistry.register("setRejected", this::onMethodSetRejected);
         this.computerMethodRegistry.register("getState", this::onMethodGetState);
@@ -115,24 +116,26 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral
         return new Object[0];
     }
 
-    private Object[] onMethodSetBusy(Object[] args)
+    @SuppressWarnings({ "unused "})
+    private Object[] onMethodSetIdle(Object[] args)
     {
-        if ((boolean) args[0])
-            this.state = BlockMagneticCardReader.EnumState.BUSY;
-        else
-            this.state = BlockMagneticCardReader.EnumState.IDLE;
-
+        this.state = BlockMagneticCardReader.EnumState.IDLE;
         this.dirtyState = true;
         return new Object[0];
     }
 
+    @SuppressWarnings({ "unused "})
+    private Object[] onMethodSetBusy(Object[] args)
+    {
+        this.state = BlockMagneticCardReader.EnumState.BUSY;
+        this.dirtyState = true;
+        return new Object[0];
+    }
+
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodSetRejected(Object[] args)
     {
-        if ((boolean) args[0])
-            this.state = BlockMagneticCardReader.EnumState.REJECTED;
-        else
-            this.state = BlockMagneticCardReader.EnumState.IDLE;
-
+        this.state = BlockMagneticCardReader.EnumState.REJECTED;
         this.dirtyState = true;
         return new Object[0];
     }

@@ -39,7 +39,8 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
     {
         this.setHasEventQueue();
 
-        this.computerMethodRegistry.register("setGranted", this::onMethodSetGranted);
+        this.computerMethodRegistry.register("acceptInputs", this::onMethodAcceptInputs);
+        this.computerMethodRegistry.register("setIdle", this::onMethodSetIdle);
         this.computerMethodRegistry.register("setRejected", this::onMethodSetRejected);
         this.computerMethodRegistry.register("getState", this::onMethodGetState);
     }
@@ -189,9 +190,21 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
     }
 
     @SuppressWarnings({ "unused" })
-    private Object[] onMethodSetGranted(Object[] args)
+    private Object[] onMethodAcceptInputs(Object[] args)
     {
-        this.state = BlockElectronicLock.EnumState.GRANTED;
+        if ((boolean) args[0])
+            this.state = BlockElectronicLock.EnumState.WAITING_INPUT;
+        else
+            this.state = BlockElectronicLock.EnumState.IDLE;
+
+        this.dirtyState = true;
+        return new Object[0];
+    }
+
+    @SuppressWarnings({ "unused" })
+    private Object[] onMethodSetIdle(Object[] args)
+    {
+        this.state = BlockElectronicLock.EnumState.IDLE;
         this.dirtyState = true;
         return new Object[0];
     }

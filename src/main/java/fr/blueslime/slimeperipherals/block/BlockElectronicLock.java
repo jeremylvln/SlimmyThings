@@ -183,8 +183,7 @@ public class BlockElectronicLock extends BlockPeripheral
     public enum EnumState implements IStringSerializable
     {
         IDLE("idle"),
-
-        GRANTED("granted"),
+        WAITING_INPUT("waiting_input"),
         REJECTED("rejected");
 
         private final String name;

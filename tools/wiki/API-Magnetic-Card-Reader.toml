@@ -19,13 +19,15 @@ params = [ "string" ]
 description = "Sets the reader in *write mode* (will write the first swiped card)"
 
 [[methods]]
+name = "setIdle"
+description = "Disable all the LEDs"
+
+[[methods]]
 name = "setBusy"
-params = [ "boolean" ]
 description = "Enable the orange LED"
 
 [[methods]]
 name = "setRejected"
-params = [ "boolean" ]
 description = "Enable the red LED"
 
 [[methods]]
