@@ -35,15 +35,26 @@ public abstract class TileEntityPeripheral extends TileEntity implements ITickab
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
         super.readFromNBT(nbtTagCompound);
-        this.owner = UUID.fromString(nbtTagCompound.getString(OWNER_NBT));
+
+        if (nbtTagCompound.hasKey(OWNER_NBT))
+            this.owner = UUID.fromString(nbtTagCompound.getString(OWNER_NBT));
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbtTagCompound)
     {
         super.writeToNBT(nbtTagCompound);
-        nbtTagCompound.setString(OWNER_NBT, this.owner.toString());
+
+        if (this.owner != null)
+            nbtTagCompound.setString(OWNER_NBT, this.owner.toString());
+
         return nbtTagCompound;
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag()
+    {
+        return this.writeToNBT(new NBTTagCompound());
     }
 
     @Override
@@ -82,7 +93,7 @@ public abstract class TileEntityPeripheral extends TileEntity implements ITickab
 
     protected boolean assertInteractWithSecurity(EntityPlayer player)
     {
-        if (this.owner != player.getUniqueID())
+        if (!this.owner.equals(player.getUniqueID()))
         {
             player.sendMessage(new TextComponentTranslation("slimeperipherals.peripheral.access_refused"));
             return false;

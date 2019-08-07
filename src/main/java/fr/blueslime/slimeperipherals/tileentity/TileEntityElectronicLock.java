@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -58,7 +59,7 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
         if (padPosition != -1)
         {
             this.pushEvent(new Object[] { player.getName(), padPosition });
-            player.playSound(SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, 0.3F, 0.6F);
+            this.world.playSound(player, this.pos, SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.6F);
         }
     }
 
