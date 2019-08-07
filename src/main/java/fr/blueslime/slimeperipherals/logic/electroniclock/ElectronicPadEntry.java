@@ -163,7 +163,7 @@ public abstract class ElectronicPadEntry implements INBTSerializable<NBTTagCompo
         return new AxisAlignedBB(
                 relative.x, relative.y, relative.z,
                 relative.x + 0.0625D, relative.y + 0.0625D, relative.z + 0.0625D
-        );
+        ).grow(0.002D);
     }
 
     public static int getPadPositionFromHitPoint(float hitX, float hitY, float hitZ, BlockMagneticCardReader.EnumOrientation orientation)

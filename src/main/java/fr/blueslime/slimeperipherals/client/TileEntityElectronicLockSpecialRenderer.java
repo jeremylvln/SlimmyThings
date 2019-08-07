@@ -19,11 +19,14 @@ public class TileEntityElectronicLockSpecialRenderer extends TileEntitySpecialRe
 
         if (te.getPadData() != null)
             te.getPadData().render(x, y, z, te.getOrientation());
+    }
 
+    private void showEntriesCollisionBoxes(TileEntityElectronicLock te, float partialTicks)
+    {
         EntityPlayer player = Minecraft.getMinecraft().player;
-        double renderPosX = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double)partialTicks;
-        double renderPosY = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double)partialTicks;
-        double renderPosZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double)partialTicks;
+        double renderPosX = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double) partialTicks;
+        double renderPosY = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double) partialTicks;
+        double renderPosZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double) partialTicks;
 
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
