@@ -66,10 +66,10 @@ public abstract class ElectronicPadEntry implements INBTSerializable<NBTTagCompo
 
     public static AxisAlignedBB getEntryAABB(double x, double y, double z, int padPosition, BlockMagneticCardReader.EnumOrientation orientation)
     {
-        AxisAlignedBB aabb = getRelativeEntryAABB(padPosition, orientation);
+        AxisAlignedBB box = getRelativeEntryAABB(padPosition, orientation);
         return new AxisAlignedBB(
-                aabb.minX + x, aabb.minY + y, aabb.minZ + z,
-                aabb.maxX + x, aabb.maxY + y, aabb.maxZ + z
+                box.minX + x, box.minY + y, box.minZ + z,
+                box.maxX + x, box.maxY + y, box.maxZ + z
         );
     }
 
@@ -161,8 +161,8 @@ public abstract class ElectronicPadEntry implements INBTSerializable<NBTTagCompo
     {
         Vec3d relative = getRelativeFromOrientation(padPosition, orientation);
         return new AxisAlignedBB(
-                relative.x - 0.03125D, relative.y - 0.03125D, relative.z - 0.03125D,
-                relative.x + 0.03125D, relative.y + 0.03125D, relative.z + 0.03125D
+                relative.x, relative.y, relative.z,
+                relative.x + 0.0625D, relative.y + 0.0625D, relative.z + 0.0625D
         );
     }
 
