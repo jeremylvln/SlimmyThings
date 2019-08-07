@@ -1,0 +1,36 @@
+name = "RFID Writer"
+description = "The **RFID Writer** writes some data on a **RFID Card**."
+notes = """
+This peripheral needs some time to write the card, the progress can be retreived using the `getProgress()` method"""
+
+[[methods]]
+name = "writeData"
+params = [ "string" ]
+description = "Sets the reader in *write mode* (will write the first card inserted)"
+
+[[methods]]
+name = "getProgress"
+returns = [ "integer", "integer" ]
+description = "Sets the reader in *write mode* (will write the first card inserted)"
+
+[[methods]]
+name = "getState"
+returns = [ "string" ]
+description = "Get the state of the peripheral (`idle`, `waiting_card`, `busy`)"
+
+[[examples]]
+name = "Write a RFID card showing the progress"
+content = """
+local component = require("component")
+local writer = component.getPrimary("rfid_writer")
+
+writer.writeData("hello")
+
+local progress, total = writer.getProgress()
+
+while progress ~= total do
+  print("Progress: " .. progress*100/total .. "% (" .. progress .. " / " .. total .. ")")
+  os.sleep(0.1)
+  progress, total = writer.getProgress()
+end
+"""
