@@ -16,7 +16,7 @@ pipeline {
                 setBuildStatus("Build in progress", "PENDING");
                 sh 'env'
                 sh 'chmod +x ./gradlew'
-                sh './gradlew build --refresh-dependencies --stacktrace'
+                sh './gradlew clean build --refresh-dependencies --stacktrace'
             }
         }
     }
