@@ -24,7 +24,6 @@ public class ItemElectronicPad extends Item
     public ItemElectronicPad()
     {
         this.setHasSubtypes(true);
-        this.setMaxStackSize(1);
         this.setRegistryName(SlimePeripherals.MODID, "electronic_pad");
         this.setUnlocalizedName(SlimePeripherals.MODID + "." + "electronic_pad");
         this.setCreativeTab(SlimePeripherals.TAB);
@@ -45,7 +44,7 @@ public class ItemElectronicPad extends Item
 
         for (int i = 0; i < ElectronicPadData.ENTRIES_NB; i += 1)
             if (padData.getEntry(i) != null)
-                tooltip.add(String.format("- At position %d: %s", i + 1, padData.getEntry(i).getName()));
+                tooltip.add(String.format("- At position %d: %s", i + 1, padData.getEntry(i).getStack().getDisplayName()));
     }
 
     @Override
@@ -53,9 +52,7 @@ public class ItemElectronicPad extends Item
     {
         if (this.isInCreativeTab(tab))
         {
-            ItemStack numericStack = new ItemStack(ModItems.ELECTRONIC_PAD, 1);
-            setPadData(numericStack, ElectronicPadData.NUMERIC);
-            items.add(numericStack);
+            items.add(new ItemStack(ModItems.ELECTRONIC_PAD, 1));
 
             ItemStack itemsStack = new ItemStack(ModItems.ELECTRONIC_PAD, 1);
             setPadData(itemsStack, ElectronicPadData.ITEMS);
@@ -65,6 +62,12 @@ public class ItemElectronicPad extends Item
 
     public static void setPadData(ItemStack stack, ElectronicPadData padData)
     {
+        if (padData == null)
+        {
+            stack.setTagCompound(null);
+            return;
+        }
+
         if (!stack.hasTagCompound())
             stack.setTagCompound(new NBTTagCompound());
         stack.getTagCompound().setTag(PAD_NBT, padData.serializeNBT());

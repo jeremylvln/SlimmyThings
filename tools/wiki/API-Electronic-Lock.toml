@@ -1,0 +1,48 @@
+name = "Electronic Lock"
+description = "The **Electronic Lock** can be used by a player to enter a unique and design code."
+notes = """
+A **Electronic Pad** is required, itself crafted by an **Electronic Pad Designer**.
+"""
+
+[[methods]]
+name = "pollEvent"
+returns = [ "player", "index" ]
+description = "Poll an event (if any) returning the player who interact and the index of the button he clicked"
+
+[[methods]]
+name = "acceptInputs"
+description = "Enable the green LED and turn on the event forwarding"
+
+[[methods]]
+name = "setIdle"
+description = "Disable all the LEDs"
+
+[[methods]]
+name = "setRejected"
+description = "Enable the red LED"
+
+[[methods]]
+name = "getState"
+returns = [ "string" ]
+description = "Get the state of the peripheral (`idle`, `waiting_input`, `rejected`)"
+
+[[examples]]
+name = "Read the buttons pressed by a player"
+content = """
+local component = require("component")
+local lock = component.getPrimary("electronic_lock")
+
+local player = nil
+local index = nil
+
+while true do
+  lock.acceptInputs()
+  player, index = lock.pollEvent()
+
+  if player ~= nil then
+    print("The player " .. player .. " pressed the button " .. index .. ".")
+  end
+
+  os.sleep(0.1)
+end
+"""

@@ -47,6 +47,12 @@ public class ItemCard extends Item
 
     public static void setData(ItemStack stack, String data)
     {
+        if (data == null)
+        {
+            stack.setTagCompound(null);
+            return;
+        }
+
         if (!stack.hasTagCompound())
             stack.setTagCompound(new NBTTagCompound());
         stack.getTagCompound().setString(DATA_NBT_KEY, data);

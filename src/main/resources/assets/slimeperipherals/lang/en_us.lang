@@ -23,6 +23,12 @@ item.slimeperipherals.rfid_card.name=RFID Card
 item.slimeperipherals.electronic_pad.name=Electronic Pad
 
 # ----------------------------------------
-# Peripheral phrases
+# GUI related
+# ----------------------------------------
+
+container.slimeperipherals.electronic_pad_designer=Electronic Pad Designer
+
+# ----------------------------------------
+# Peripheral related
 # ----------------------------------------
 slimeperipherals.peripheral.access_refused=You don't have the permission to modify this peripheral.

@@ -1,6 +1,7 @@
 package fr.blueslime.slimeperipherals.block;
 
 import fr.blueslime.slimeperipherals.SlimePeripherals;
+import fr.blueslime.slimeperipherals.client.ModGuiHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -38,6 +39,9 @@ public class BlockElectronicPadDesigner extends Block
     {
         if (worldIn.isRemote)
             return true;
+
+        playerIn.openGui(SlimePeripherals.INSTANCE, ModGuiHandler.ELECTRONIC_PAD_DESIGNER_ID,
+                worldIn, pos.getX(), pos.getY(), pos.getZ());
 
         return true;
     }

@@ -85,6 +85,8 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
             return;
 
         this.pad = stack.copy();
+        this.pad.setCount(1);
+
         this.padData = ItemElectronicPad.getPadData(this.pad);
         player.inventory.decrStackSize(player.inventory.currentItem, 1);
 

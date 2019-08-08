@@ -1,43 +1,75 @@
 package fr.blueslime.slimeperipherals.logic.electroniclock;
 
 import fr.blueslime.slimeperipherals.block.BlockMagneticCardReader;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class ElectronicPadEntry implements INBTSerializable<NBTTagCompound>, IStringSerializable
+public class ElectronicPadEntry implements INBTSerializable<NBTTagCompound>
 {
-    public enum Type { CHARACTER, ITEM_STACK }
-
-    private static final String TYPE_NBT = "Type";
     private static final String PAD_POSITION_NBT = "PadPosition";
+    private static final String STACK_NBT = "Item";
 
-    protected Type type;
-    protected int padPosition;
+    private int padPosition;
+    private ItemStack stack;
 
-    public ElectronicPadEntry(Type type, int padPosition)
+    public ElectronicPadEntry(int padPosition)
     {
-        this.type = type;
+        this(padPosition, ItemStack.EMPTY);
+    }
+
+    public ElectronicPadEntry(int padPosition, ItemStack stack)
+    {
         this.padPosition = padPosition;
+        this.stack = stack;
     }
 
     @SideOnly(Side.CLIENT)
-    public abstract void render(double x, double y, double z, BlockMagneticCardReader.EnumOrientation orientation);
+    public void render(double x, double y, double z, BlockMagneticCardReader.EnumOrientation orientation)
+    {
+        Vec3d renderPosition = getPositionWithOrientation(x, y, z, this.padPosition, orientation);
 
-    public abstract void serializeEntryNBT(NBTTagCompound nbtTagCompound);
-    public abstract void deserializeEntryNBT(NBTTagCompound nbtTagCompound);
+        GlStateManager.pushMatrix();
+        GlStateManager.disableLighting();
+        GlStateManager.translate(renderPosition.x, renderPosition.y, renderPosition.z);
+        GlStateManager.scale(0.0625F * 2, 0.0625F * 2, 0.0625F * 2);
+        GlStateManager.translate(0.25D, 0.25D, 0.25D);
+
+        if (orientation.isHorizontal())
+        {
+            if (orientation == BlockMagneticCardReader.EnumOrientation.DOWN_NORTH
+                    || orientation == BlockMagneticCardReader.EnumOrientation.DOWN_SOUTH
+                    || orientation == BlockMagneticCardReader.EnumOrientation.UP_NORTH
+                    || orientation == BlockMagneticCardReader.EnumOrientation.UP_SOUTH)
+                GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
+            else
+                GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
+        }
+
+        GlStateManager.pushAttrib();
+        RenderHelper.enableStandardItemLighting();
+        Minecraft.getMinecraft().getRenderItem().renderItem(this.stack, ItemCameraTransforms.TransformType.FIXED);
+        RenderHelper.disableStandardItemLighting();
+        GlStateManager.popAttrib();
+
+        GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
+    }
 
     @Override
     public NBTTagCompound serializeNBT()
     {
         NBTTagCompound nbtTagCompound = new NBTTagCompound();
-        nbtTagCompound.setInteger(TYPE_NBT, this.type.ordinal());
         nbtTagCompound.setInteger(PAD_POSITION_NBT, this.padPosition);
-        this.serializeEntryNBT(nbtTagCompound);
+        nbtTagCompound.setTag(STACK_NBT, this.stack.writeToNBT(new NBTTagCompound()));
         return nbtTagCompound;
     }
 
@@ -45,17 +77,12 @@ public abstract class ElectronicPadEntry implements INBTSerializable<NBTTagCompo
     public void deserializeNBT(NBTTagCompound nbtTagCompound)
     {
         this.padPosition = nbtTagCompound.getInteger(PAD_POSITION_NBT);
-        this.deserializeEntryNBT(nbtTagCompound);
+        this.stack = new ItemStack(nbtTagCompound.getCompoundTag(STACK_NBT));
     }
 
-    public static ElectronicPadEntry byType(NBTTagCompound nbtTagCompound)
+    public ItemStack getStack()
     {
-        switch (Type.values()[nbtTagCompound.getInteger(TYPE_NBT)])
-        {
-            case CHARACTER: return new ElectronicPadEntryCharacter();
-            case ITEM_STACK: return new ElectronicPadEntryItemStack();
-            default: return null;
-        }
+        return this.stack;
     }
 
     public static Vec3d getPositionWithOrientation(double x, double y, double z, int padPosition, BlockMagneticCardReader.EnumOrientation orientation)

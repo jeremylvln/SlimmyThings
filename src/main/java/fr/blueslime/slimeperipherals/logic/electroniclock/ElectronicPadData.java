@@ -3,6 +3,7 @@ package fr.blueslime.slimeperipherals.logic.electroniclock;
 import fr.blueslime.slimeperipherals.block.BlockMagneticCardReader;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -13,18 +14,19 @@ public class ElectronicPadData implements INBTSerializable<NBTTagList>
 {
     public static final int ENTRIES_NB = 12;
 
-    public static final ElectronicPadData NUMERIC = new Builder()
-            .withCharacter(0, '1').withCharacter(1, '2').withCharacter(2, '3')
-            .withCharacter(3, '4').withCharacter(4, '5').withCharacter(5, '6')
-            .withCharacter(6, '7').withCharacter(7, '8').withCharacter(8, '9')
-            .withCharacter(9, 'A').withCharacter(10, '0').withCharacter(11, 'B')
-            .build();
-
     public static final ElectronicPadData ITEMS = new Builder()
-            .withItemStack(0, new ItemStack(Blocks.LOG)).withItemStack(1, new ItemStack(Blocks.SAND)).withItemStack(2, new ItemStack(Blocks.COBBLESTONE))
-            .withItemStack(3, new ItemStack(Blocks.QUARTZ_BLOCK)).withItemStack(4, new ItemStack(Blocks.PRISMARINE, 1, BlockPrismarine.BRICKS_META)).withItemStack(5, new ItemStack(Blocks.BEDROCK))
-            .withItemStack(6, new ItemStack(Blocks.GLOWSTONE)).withItemStack(7, new ItemStack(Blocks.MAGMA)).withItemStack(8, new ItemStack(Blocks.GLASS))
-            .withCharacter(9, 'A').withItemStack(10, new ItemStack(Blocks.COAL_BLOCK)).withCharacter(11, 'B')
+            .with(0, new ItemStack(Blocks.LOG))
+            .with(1, new ItemStack(Blocks.SAND))
+            .with(2, new ItemStack(Blocks.COBBLESTONE))
+            .with(3, new ItemStack(Blocks.QUARTZ_BLOCK))
+            .with(4, new ItemStack(Blocks.PRISMARINE, 1, BlockPrismarine.BRICKS_META))
+            .with(5, new ItemStack(Blocks.BEDROCK))
+            .with(6, new ItemStack(Blocks.GLOWSTONE))
+            .with(7, new ItemStack(Blocks.MAGMA))
+            .with(8, new ItemStack(Blocks.GLASS))
+            .with(9, new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, EnumDyeColor.RED.getMetadata()))
+            .with(10, new ItemStack(Blocks.COAL_BLOCK))
+            .with(11, new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, EnumDyeColor.GREEN.getMetadata()))
             .build();
 
     private final ElectronicPadEntry[] entries;
@@ -63,11 +65,7 @@ public class ElectronicPadData implements INBTSerializable<NBTTagList>
     {
         for (int i = 0; i < ENTRIES_NB; i += 1)
         {
-            this.entries[i] = ElectronicPadEntry.byType(nbtTagList.getCompoundTagAt(i));
-
-            if (this.entries[i] == null)
-                throw new IllegalStateException("Unknown electronic pad entry");
-
+            this.entries[i] = new ElectronicPadEntry(i);
             this.entries[i].deserializeNBT(nbtTagList.getCompoundTagAt(i));
         }
     }
@@ -94,15 +92,10 @@ public class ElectronicPadData implements INBTSerializable<NBTTagList>
             return new ElectronicPadData(this.entries);
         }
 
-        public Builder withCharacter(int pos, char character)
-        {
-            this.entries[pos] = new ElectronicPadEntryCharacter(pos, character);
-            return this;
-        }
 
-        public Builder withItemStack(int pos, ItemStack stack)
+        public Builder with(int pos, ItemStack stack)
         {
-            this.entries[pos] = new ElectronicPadEntryItemStack(pos, stack);
+            this.entries[pos] = new ElectronicPadEntry(pos, stack);
             return this;
         }
 
