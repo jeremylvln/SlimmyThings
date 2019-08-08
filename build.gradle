@@ -17,8 +17,12 @@ archivesBaseName = "SlimePeripherals"
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
-if (System.getenv("")) {
+if (System.getenv("BUILD_NUMBER")) {
     version += "." + System.getenv("BUILD_NUMBER")
+}
+
+if (System.getenv("BUILD_TAG")) {
+    version += "-" + System.getenv("BUILD_TAG")
 }
 
 minecraft {
