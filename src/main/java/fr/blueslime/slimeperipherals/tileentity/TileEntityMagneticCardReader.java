@@ -7,25 +7,26 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileEntityMagneticCardReader extends TileEntityPeripheral implements ITickable
+public class TileEntityMagneticCardReader extends TileEntityPeripheral
 {
     private static final String STATE_NBT = "State";
     private static final String DATA_TO_WRITE_NBT = "DataToWrite";
 
     private BlockMagneticCardReader.EnumState state = BlockMagneticCardReader.EnumState.IDLE;
     private String dataToWrite;
+
     private boolean dirtyState = true;
 
     public TileEntityMagneticCardReader()
     {
-        this.setHasEventQueue(true);
+        this.setHasEventQueue();
 
         this.computerMethodRegistry.register("readData", this::onMethodReadData);
         this.computerMethodRegistry.register("writeData", this::onMethodWriteData);
+        this.computerMethodRegistry.register("setIdle", this::onMethodSetIdle);
         this.computerMethodRegistry.register("setBusy", this::onMethodSetBusy);
         this.computerMethodRegistry.register("setRejected", this::onMethodSetRejected);
         this.computerMethodRegistry.register("getState", this::onMethodGetState);
@@ -50,6 +51,8 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral implement
     @Override
     public void update()
     {
+        super.update();
+
         if (this.dirtyState)
         {
             IBlockState blockState = this.world.getBlockState(this.pos);
@@ -97,6 +100,7 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral implement
         return "magnetic_card_reader";
     }
 
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodReadData(Object[] args)
     {
         this.state = BlockMagneticCardReader.EnumState.WAITING_CARD;
@@ -112,28 +116,31 @@ public class TileEntityMagneticCardReader extends TileEntityPeripheral implement
         return new Object[0];
     }
 
+    @SuppressWarnings({ "unused "})
+    private Object[] onMethodSetIdle(Object[] args)
+    {
+        this.state = BlockMagneticCardReader.EnumState.IDLE;
+        this.dirtyState = true;
+        return new Object[0];
+    }
+
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodSetBusy(Object[] args)
     {
-        if ((boolean) args[0])
-            this.state = BlockMagneticCardReader.EnumState.BUSY;
-        else
-            this.state = BlockMagneticCardReader.EnumState.IDLE;
-
+        this.state = BlockMagneticCardReader.EnumState.BUSY;
         this.dirtyState = true;
         return new Object[0];
     }
 
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodSetRejected(Object[] args)
     {
-        if ((boolean) args[0])
-            this.state = BlockMagneticCardReader.EnumState.REJECTED;
-        else
-            this.state = BlockMagneticCardReader.EnumState.IDLE;
-
+        this.state = BlockMagneticCardReader.EnumState.REJECTED;
         this.dirtyState = true;
         return new Object[0];
     }
 
+    @SuppressWarnings({ "unused "})
     private Object[] onMethodGetState(Object[] args)
     {
         return new Object[] { this.state.getName() };

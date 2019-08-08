@@ -1,0 +1,76 @@
+name = "Magnetic Card Reader"
+description = "The **Magnetic Card Reader** reads a **Magnetic Card** swiped by a player."
+notes = """
+When the reader is in *read mode*, the green LED will be static whereas in *write mode* where the LED will blink.
+"""
+
+[[methods]]
+name = "pollEvent"
+returns = [ "player", "data" ]
+description = "Poll an event (if any) returning the player who swiped and his card's data"
+
+[[methods]]
+name = "readData"
+description = "Sets the reader in *read mode*"
+
+[[methods]]
+name = "writeData"
+params = [ "string" ]
+description = "Sets the reader in *write mode* (will write the first swiped card)"
+
+[[methods]]
+name = "setIdle"
+description = "Disable all the LEDs"
+
+[[methods]]
+name = "setBusy"
+description = "Enable the orange LED"
+
+[[methods]]
+name = "setRejected"
+description = "Enable the red LED"
+
+[[methods]]
+name = "getState"
+returns = [ "string" ]
+description = "Get the state of the peripheral (`idle`, `waiting_card`, `waiting_card_write`, `busy`, `rejected`)"
+
+[[examples]]
+name = "Read a card in a loop"
+content = """
+local component = require("component")
+local reader = component.getPrimary("magnetic_card_reader")
+
+local player = nil
+local data = nil
+
+while true do
+  reader.readData() # Set the reader in read mode (green LED)
+  player, data = reader.pollEvent() # Each swipe is an event in read mode
+
+  if player ~= nil then
+    reader.setBusy(true) # We enable the orange LED (because we are busy)
+
+    print("Player " .. player .. " swiped a card with the data '" .. data .. "'!")
+
+    if data == "super_secret_data" then # We compare the data of the card
+      print("Access granted!")
+    else
+      reader.setRejected(true) # The data is incorrect, we enable the red LED
+    end
+
+    os.sleep(1)
+  end
+
+  os.sleep(0.1)
+end
+"""
+
+[[examples]]
+name = "Write a card"
+content = """
+local component = require("component")
+local reader = component.getPrimary("magnetic_card_reader")
+
+reader.writeData("super_secret_data") # Will write this data the next swipe
+"""

@@ -1,4 +1,4 @@
-package fr.blueslime.slimeperipherals.common;
+package fr.blueslime.slimeperipherals.integration.computer;
 
 public interface IComputerIntegration
 {

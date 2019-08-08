@@ -1,0 +1,32 @@
+name = "RFID Antenna"
+description = "The **RFID Antenna** permits to detect the **RFID Cards** hold by the players within a range."
+notes = "If a player has more than one card in his inventory, multiple events will be pushed."
+
+[[methods]]
+name = "pollEvent"
+returns = [ "player", "data" ]
+description = "Poll an event (if any) returning the player detected and his card"
+
+[[methods]]
+name = "scan"
+description = "Look for nearby cards"
+
+[[examples]]
+name = "Scan for nearby cards"
+content = """
+local component = require("component")
+local antenna = component.getPrimary("rfid_antenna")
+
+while true do
+  antenna.scan() # Performs a scan
+
+  local player, data = antenna.pollEvent()
+
+  while player ~= nil do
+    print("Player " .. player .. " have a card with the data '" .. data .. "'!")
+    player, data = antenna.pollEvent()
+  end
+
+  os.sleep(1)
+end
+"""

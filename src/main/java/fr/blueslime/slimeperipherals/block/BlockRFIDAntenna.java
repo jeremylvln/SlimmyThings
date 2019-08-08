@@ -2,7 +2,6 @@ package fr.blueslime.slimeperipherals.block;
 
 import fr.blueslime.slimeperipherals.SlimePeripherals;
 import fr.blueslime.slimeperipherals.tileentity.TileEntityRFIDAntenna;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -16,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRFIDAntenna extends Block
+public class BlockRFIDAntenna extends BlockPeripheral
 {
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D);
 

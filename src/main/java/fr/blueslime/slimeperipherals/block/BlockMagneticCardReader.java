@@ -3,7 +3,6 @@ package fr.blueslime.slimeperipherals.block;
 import fr.blueslime.slimeperipherals.SlimePeripherals;
 import fr.blueslime.slimeperipherals.init.ModItems;
 import fr.blueslime.slimeperipherals.tileentity.TileEntityMagneticCardReader;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -22,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMagneticCardReader extends Block
+public class BlockMagneticCardReader extends BlockPeripheral
 {
     public static final PropertyEnum<EnumOrientation> ORIENTATION = PropertyEnum.create("facing", EnumOrientation.class);
     public static final PropertyEnum<EnumState> STATE = PropertyEnum.create("state", EnumState.class);
@@ -168,25 +167,32 @@ public class BlockMagneticCardReader extends Block
 
     public enum EnumOrientation implements IStringSerializable
     {
-        DOWN_NORTH("down_north"),
-        DOWN_EAST("down_east"),
-        DOWN_SOUTH("down_south"),
-        DOWN_WEST("down_west"),
-        NORTH("north"),
-        EAST("east"),
-        SOUTH("south"),
-        WEST("west"),
-        UP_NORTH("up_north"),
-        UP_EAST("up_east"),
-        UP_SOUTH("up_south"),
-        UP_WEST("up_west");
+        DOWN_NORTH("down_north", true),
+        DOWN_EAST("down_east", true),
+        DOWN_SOUTH("down_south", true),
+        DOWN_WEST("down_west", true),
+        NORTH("north", false),
+        EAST("east", false),
+        SOUTH("south", false),
+        WEST("west", false),
+        UP_NORTH("up_north", true),
+        UP_EAST("up_east", true),
+        UP_SOUTH("up_south", true),
+        UP_WEST("up_west", true);
 
         private static final EnumOrientation[] META_LOOKUP = new EnumOrientation[values().length];
         private final String name;
+        private final boolean horizontal;
 
-        EnumOrientation(String name)
+        EnumOrientation(String name, boolean horizontal)
         {
             this.name = name;
+            this.horizontal = horizontal;
+        }
+
+        public boolean isHorizontal()
+        {
+            return this.horizontal;
         }
 
         public String toString()

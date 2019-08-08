@@ -10,17 +10,21 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.0"
+version = "1.0.0"
 group = "fr.blueslime.slimeperipherals"
 archivesBaseName = "SlimePeripherals"
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
+if (System.getenv("")) {
+    version += "." + System.getenv("BUILD_NUMBER")
+}
+
 minecraft {
     version = "1.12.2-14.23.5.2768"
     runDir = "run"
-    
+
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
@@ -32,6 +36,7 @@ minecraft {
 
 repositories {
     maven {
+        name "OpenComputers Maven"
         url = "https://maven.cil.li"
     }
 
@@ -48,8 +53,8 @@ dependencies {
     // you may put jars on which you depend on in ./libs
     compile "li.cil.oc:OpenComputers:${openComputersVersion}:api"
 
-    runtime "mezz.jei:jei_1.12.2:${jeiVersion}"
     runtime "li.cil.oc:OpenComputers:${openComputersVersion}"
+    runtime "mezz.jei:jei_1.12.2:${jeiVersion}"
 }
 
 processResources {
@@ -60,7 +65,7 @@ processResources {
         include "mcmod.info"
         expand "version":project.version, "mcversion":project.minecraft.version
     }
-        
+
     from(sourceSets.main.resources.srcDirs) {
         exclude "mcmod.info"
     }

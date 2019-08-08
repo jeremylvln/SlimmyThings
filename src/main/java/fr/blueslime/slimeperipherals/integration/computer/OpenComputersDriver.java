@@ -1,4 +1,4 @@
-package fr.blueslime.slimeperipherals.common;
+package fr.blueslime.slimeperipherals.integration.computer;
 
 import li.cil.oc.api.Network;
 import li.cil.oc.api.driver.NamedBlock;

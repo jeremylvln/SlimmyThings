@@ -1,32 +1,35 @@
 package fr.blueslime.slimeperipherals.block;
 
 import fr.blueslime.slimeperipherals.SlimePeripherals;
+import fr.blueslime.slimeperipherals.init.ModBlocks;
 import fr.blueslime.slimeperipherals.init.ModItems;
-import fr.blueslime.slimeperipherals.tileentity.TileEntityRFIDWriter;
+import fr.blueslime.slimeperipherals.tileentity.TileEntityElectronicLock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRFIDWriter extends BlockPeripheral
+@Mod.EventBusSubscriber(modid = SlimePeripherals.MODID)
+public class BlockElectronicLock extends BlockPeripheral
 {
-    private static final PropertyEnum<BlockMagneticCardReader.EnumOrientation> ORIENTATION = BlockMagneticCardReader.ORIENTATION;
+    public static final PropertyEnum<BlockMagneticCardReader.EnumOrientation> ORIENTATION = BlockMagneticCardReader.ORIENTATION;
     public static final PropertyEnum<EnumState> STATE = PropertyEnum.create("state", EnumState.class);
-    public static final PropertyBool FILLED = PropertyBool.create("filled");
 
     private static final AxisAlignedBB UP_X_AABB = new AxisAlignedBB(0.3125D, 0.0D, 0.25D, 0.6875D, 0.15625D, 0.75D);
     private static final AxisAlignedBB UP_Y_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.3125D, 0.75D, 0.15625D, 0.6875D);
@@ -37,37 +40,35 @@ public class BlockRFIDWriter extends BlockPeripheral
     private static final AxisAlignedBB DOWN_X_AABB = new AxisAlignedBB(0.3125D, 1.0D, 0.25D, 0.6875D, 0.84375D, 0.75D);
     private static final AxisAlignedBB DOWN_Y_AABB = new AxisAlignedBB(0.25D, 1.0D, 0.3125D, 0.75D, 0.84375D, 0.6875D);
 
-    public BlockRFIDWriter()
+    public BlockElectronicLock()
     {
         super(Material.IRON);
         this.setDefaultState(this.blockState.getBaseState()
                 .withProperty(ORIENTATION, BlockMagneticCardReader.EnumOrientation.DOWN_NORTH)
-                .withProperty(STATE, EnumState.IDLE)
-                .withProperty(FILLED, false));
+                .withProperty(STATE, EnumState.IDLE));
 
         this.setHardness(0.5F);
         this.setSoundType(SoundType.METAL);
-        this.setRegistryName(SlimePeripherals.MODID, "rfid_writer");
-        this.setUnlocalizedName(SlimePeripherals.MODID + ".rfid_writer");
+        this.setRegistryName(SlimePeripherals.MODID, "electronic_lock");
+        this.setUnlocalizedName(SlimePeripherals.MODID + ".electronic_lock");
         this.setCreativeTab(SlimePeripherals.TAB);
     }
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if (playerIn.isSneaking() || worldIn.isRemote)
+        if (worldIn.isRemote)
             return true;
 
-        ItemStack itemStack = playerIn.getHeldItem(hand);
-        TileEntityRFIDWriter tileEntity = (TileEntityRFIDWriter) worldIn.getTileEntity(pos);
+        TileEntityElectronicLock tileEntity = (TileEntityElectronicLock) worldIn.getTileEntity(pos);
 
         if (tileEntity == null)
             return true;
 
-        if (!itemStack.isEmpty() && itemStack.getItem() == ModItems.RFID_CARD)
-            tileEntity.onCardPlace(playerIn, itemStack);
+        if (playerIn.isSneaking())
+            tileEntity.onPadMovement(playerIn, playerIn.getHeldItem(hand));
         else
-            tileEntity.onCardTake();
+            tileEntity.onPlayerInteract(playerIn, hitX, hitY, hitZ);
 
         return true;
     }
@@ -77,8 +78,8 @@ public class BlockRFIDWriter extends BlockPeripheral
     {
         TileEntity tileEntity = worldIn.getTileEntity(pos);
 
-        if (!worldIn.isRemote && tileEntity instanceof TileEntityRFIDWriter)
-            ((TileEntityRFIDWriter) tileEntity).onBlockBreak();
+        if (!worldIn.isRemote && tileEntity instanceof TileEntityElectronicLock)
+            ((TileEntityElectronicLock) tileEntity).onBlockBreak();
 
         super.breakBlock(worldIn, pos, state);
     }
@@ -86,7 +87,7 @@ public class BlockRFIDWriter extends BlockPeripheral
     @Override
     public TileEntity createTileEntity(World world, IBlockState state)
     {
-        return new TileEntityRFIDWriter();
+        return new TileEntityElectronicLock();
     }
 
     @Override
@@ -179,14 +180,22 @@ public class BlockRFIDWriter extends BlockPeripheral
     @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, ORIENTATION, STATE, FILLED);
+        return new BlockStateContainer(this, ORIENTATION, STATE);
+    }
+
+    @SubscribeEvent
+    public static void onPlayerInteract(PlayerInteractEvent.RightClickBlock event)
+    {
+        if (event.getWorld().getBlockState(event.getPos()).getBlock() == ModBlocks.ELECTRONIC_LOCK)
+            if (event.getEntityPlayer().isSneaking() && event.getItemStack().getItem() == ModItems.ELECTRONIC_PAD)
+                event.setUseBlock(Event.Result.ALLOW);
     }
 
     public enum EnumState implements IStringSerializable
     {
         IDLE("idle"),
-        WAITING_CARD("waiting_card"),
-        BUSY("busy");
+        WAITING_INPUT("waiting_input"),
+        REJECTED("rejected");
 
         private final String name;
 
