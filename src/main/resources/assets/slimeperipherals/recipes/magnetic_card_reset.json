@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "item": "slimeperipherals:magnetic_card",
-      "data": 12
+      "data": 32767
     },
     {
       "item": "minecraft:water_bucket",

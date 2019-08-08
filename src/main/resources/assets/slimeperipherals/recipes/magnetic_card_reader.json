@@ -2,20 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "ITI",
-    "IDI",
+    "IRI",
     "ICI"
   ],
   "key": {
-    "T": {
-      "item": "minecraft:redstone_torch",
-      "data": 0
-    },
     "I": {
       "item": "minecraft:iron_ingot",
       "data": 0
     },
-    "D": {
-      "item": "minecraft:dye",
+    "T": {
+      "item": "minecraft:iron_trapdoor",
+      "data": 0
+    },
+    "R": {
+      "item": "minecraft:redstone",
       "data": 0
     },
     "C": {
@@ -24,7 +24,7 @@
     }
   },
   "result": {
-    "item": "slimeperipherals:rfid_writer",
+    "item": "slimeperipherals:magnetic_card_reader",
     "data": 0,
     "count": 1
   }

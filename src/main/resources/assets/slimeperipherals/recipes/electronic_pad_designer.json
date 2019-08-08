@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SBR",
+    "III",
+    "P P"
+  ],
+  "key": {
+    "S": {
+      "item": "opencomputers:wrench",
+      "data": 0
+    },
+    "B": {
+      "item": "opencomputers:material",
+      "data": 14
+    },
+    "R": {
+      "item": "minecraft:redstone",
+      "data": 0
+    },
+    "I": {
+      "item": "minecraft:iron_ingot",
+      "data": 0
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    }
+  },
+  "result": {
+    "item": "slimeperipherals:electronic_pad_designer",
+    "data": 0,
+    "count": 1
+  }
+}

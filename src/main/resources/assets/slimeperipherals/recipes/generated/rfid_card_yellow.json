@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "item": "slimeperipherals:rfid_card",
-      "data": 0
+      "data": 32767
     },
     {
       "item": "minecraft:dye",

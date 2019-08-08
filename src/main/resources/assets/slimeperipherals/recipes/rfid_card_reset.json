@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "item": "slimeperipherals:rfid_card",
-      "data": 4
-      
+      "data": 32767
     },
     {
       "item": "minecraft:water_bucket",

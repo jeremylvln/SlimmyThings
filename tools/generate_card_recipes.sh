@@ -17,7 +17,7 @@ for (( i=1; i<$len; i++ )); do
   "ingredients": [
     {
       "item": "slimeperipherals:magnetic_card",
-      "data": 0
+      "data": 32767
     },
     {
       "item": "minecraft:dye",
@@ -27,34 +27,6 @@ for (( i=1; i<$len; i++ )); do
   "result": {
     "item": "slimeperipherals:magnetic_card",
     "data": ${data_dest[$i]},
-    "count": 1
-  }
-}
-EOF
-    if [ ! $? -eq 0 ]; then
-        exit 1
-    fi
-    echo "Generated recipe $name."
-done
-
-for (( i=1; i<$len; i++ )); do
-    name="magnetic_card_${colors[$i]}_reset"
-	cat > $OUTPUT/$name.json <<EOF
-{
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "slimeperipherals:magnetic_card",
-      "data": ${data_dest[$i]}
-    },
-    {
-      "item": "minecraft:water_bucket",
-      "data": 0
-    }
-  ],
-  "result": {
-    "item": "slimeperipherals:magnetic_card",
-    "data": 0,
     "count": 1
   }
 }
@@ -73,7 +45,7 @@ for (( i=1; i<$len; i++ )); do
   "ingredients": [
     {
       "item": "slimeperipherals:rfid_card",
-      "data": 0
+      "data": 32767
     },
     {
       "item": "minecraft:dye",
@@ -83,35 +55,6 @@ for (( i=1; i<$len; i++ )); do
   "result": {
     "item": "slimeperipherals:rfid_card",
     "data": ${data_dest[$i]},
-    "count": 1
-  }
-}
-EOF
-    if [ ! $? -eq 0 ]; then
-        exit 1
-    fi
-    echo "Generated recipe $name."
-done
-
-for (( i=1; i<$len; i++ )); do
-    name="rfid_card_${colors[$i]}_reset"
-	cat > $OUTPUT/$name.json <<EOF
-{
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "slimeperipherals:rfid_card",
-      "data": ${data_dest[$i]}
-
-    },
-    {
-      "item": "minecraft:water_bucket",
-      "data": 0
-    }
-  ],
-  "result": {
-    "item": "slimeperipherals:rfid_card",
-    "data": 0,
     "count": 1
   }
 }

@@ -1,20 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "PCP"
+    "B",
+    "B"
   ],
   "key": {
-    "P": {
-      "item": "minecraft:paper",
-      "data": 0
-    },
-    "C": {
+    "B": {
       "item": "opencomputers:material",
-      "data": 4
+      "data": 14
     }
   },
   "result": {
-    "item": "slimeperipherals:magnetic_card",
+    "item": "slimeperipherals:electronic_pad",
     "data": 0,
     "count": 1
   }
