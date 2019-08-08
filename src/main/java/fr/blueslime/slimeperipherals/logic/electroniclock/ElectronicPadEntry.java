@@ -33,9 +33,12 @@ public class ElectronicPadEntry implements INBTSerializable<NBTTagCompound>
     }
 
     @SideOnly(Side.CLIENT)
-    public void render(double x, double y, double z, BlockMagneticCardReader.EnumOrientation orientation)
+    public void render(double x, double y, double z, BlockMagneticCardReader.EnumOrientation orientation, boolean clicked)
     {
         Vec3d renderPosition = getPositionWithOrientation(x, y, z, this.padPosition, orientation);
+
+        if (clicked)
+            renderPosition = renderPosition.add(getClickedTranslate(orientation));
 
         GlStateManager.pushMatrix();
         GlStateManager.disableLighting();
@@ -85,12 +88,6 @@ public class ElectronicPadEntry implements INBTSerializable<NBTTagCompound>
         return this.stack;
     }
 
-    public static Vec3d getPositionWithOrientation(double x, double y, double z, int padPosition, BlockMagneticCardReader.EnumOrientation orientation)
-    {
-        Vec3d relative = getRelativeFromOrientation(padPosition, orientation);
-        return new Vec3d(x + relative.x, y + relative.y, z + relative.z);
-    }
-
     public static AxisAlignedBB getEntryAABB(double x, double y, double z, int padPosition, BlockMagneticCardReader.EnumOrientation orientation)
     {
         AxisAlignedBB box = getRelativeEntryAABB(padPosition, orientation);
@@ -98,6 +95,12 @@ public class ElectronicPadEntry implements INBTSerializable<NBTTagCompound>
                 box.minX + x, box.minY + y, box.minZ + z,
                 box.maxX + x, box.maxY + y, box.maxZ + z
         );
+    }
+
+    private static Vec3d getPositionWithOrientation(double x, double y, double z, int padPosition, BlockMagneticCardReader.EnumOrientation orientation)
+    {
+        Vec3d relative = getRelativeFromOrientation(padPosition, orientation);
+        return new Vec3d(x + relative.x, y + relative.y, z + relative.z);
     }
 
     private static Vec3d getRelativeFromOrientation(int padPosition, BlockMagneticCardReader.EnumOrientation orientation)
@@ -179,6 +182,31 @@ public class ElectronicPadEntry implements INBTSerializable<NBTTagCompound>
                         0.84375D,
                         0.375D + (padColumn * 0.0625D) + (padColumn * 0.03125)
                 );
+        }
+
+        throw new IllegalStateException("Invalid orientation");
+    }
+
+    private static Vec3d getClickedTranslate(BlockMagneticCardReader.EnumOrientation orientation)
+    {
+        switch (orientation)
+        {
+            case SOUTH: return new Vec3d(0.0D, 0.0D, -0.015625D);
+            case NORTH: return new Vec3d(0.0D, 0.0D, 0.015625D);
+            case WEST: return new Vec3d(0.015625D, 0.0D, 0.0D);
+            case EAST: return new Vec3d(-0.015625D, 0.0D, 0.0D);
+
+            case UP_SOUTH:
+            case UP_NORTH:
+            case UP_WEST:
+            case UP_EAST:
+                return new Vec3d(0.0D, -0.015625D, 0.0D);
+
+            case DOWN_SOUTH:
+            case DOWN_NORTH:
+            case DOWN_WEST:
+            case DOWN_EAST:
+                return new Vec3d(0.0D, 0.015625D, 0.0D);
         }
 
         throw new IllegalStateException("Invalid orientation");

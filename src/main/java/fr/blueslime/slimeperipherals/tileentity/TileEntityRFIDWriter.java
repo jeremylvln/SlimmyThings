@@ -39,7 +39,6 @@ public class TileEntityRFIDWriter extends TileEntityPeripheral implements ITicka
     {
         if (!this.currentStack.isEmpty())
         {
-            System.out.println("Already has an item, dropping");
             this.onCardTake();
             return;
         }

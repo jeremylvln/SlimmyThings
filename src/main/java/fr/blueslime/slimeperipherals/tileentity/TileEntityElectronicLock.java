@@ -8,6 +8,7 @@ import fr.blueslime.slimeperipherals.item.ItemElectronicPad;
 import fr.blueslime.slimeperipherals.logic.electroniclock.ElectronicPadData;
 import fr.blueslime.slimeperipherals.logic.electroniclock.ElectronicPadEntry;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.InventoryHelper;
@@ -20,6 +21,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class TileEntityElectronicLock extends TileEntityPeripheral
@@ -28,10 +31,13 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
 
     private static final String STATE_NBT = "State";
     private static final String PAD_NBT = "Pad";
+    private static final String CLICKED_LIST_NBT = "Clicked";
 
     private BlockElectronicLock.EnumState state = BlockElectronicLock.EnumState.IDLE;
     private ItemStack pad = ItemStack.EMPTY;
     private ElectronicPadData padData = null;
+
+    private Map<Integer, Integer> clickedButtonsTimeouts = new HashMap<>();
 
     private boolean dirtyState = true;
 
@@ -53,14 +59,17 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
         int padPosition = ElectronicPadEntry.getPadPositionFromHitPoint(hitX, hitY, hitZ,
                 this.world.getBlockState(this.pos).getValue(BlockElectronicLock.ORIENTATION));
 
-        player.sendMessage(new TextComponentString(
-                this.world.getBlockState(this.pos).getValue(BlockElectronicLock.ORIENTATION).getName() + ": " +
-                        padPosition + " [" + hitX + "; " + hitY + "; " + hitZ + "]"));
+        if (this.clickedButtonsTimeouts.containsKey(padPosition))
+            return;
 
         if (padPosition != -1)
         {
             this.pushEvent(new Object[] { player.getName(), padPosition });
             this.world.playSound(player, this.pos, SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.6F);
+            this.clickedButtonsTimeouts.put(padPosition, 20);
+
+            IBlockState blockState = this.world.getBlockState(this.pos);
+            this.world.notifyBlockUpdate(this.pos, blockState, blockState, 2);
         }
     }
 
@@ -105,6 +114,14 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
     public void update()
     {
         super.update();
+
+        this.clickedButtonsTimeouts.forEach((position, ticks) -> this.clickedButtonsTimeouts.put(position, ticks - 1));
+
+        if (this.clickedButtonsTimeouts.values().removeIf(ticks -> ticks <= 0))
+        {
+            IBlockState blockState = this.world.getBlockState(this.pos);
+            this.world.notifyBlockUpdate(this.pos, blockState, blockState, 2);
+        }
 
         if (this.dirtyState)
         {
@@ -164,6 +181,13 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
             this.pad = ItemStack.EMPTY;
             this.padData = null;
         }
+
+        int[] clickedArray = nbtTagCompound.getIntArray(CLICKED_LIST_NBT);
+        this.clickedButtonsTimeouts.clear();
+
+        for (int i = 0; i < clickedArray.length; i += 1)
+            if (clickedArray[i] > 0)
+                this.clickedButtonsTimeouts.put(i, clickedArray[i]);
     }
 
     @Override
@@ -173,6 +197,10 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
 
         if (!this.pad.isEmpty())
             nbtTagCompound.setTag(PAD_NBT, this.pad.writeToNBT(new NBTTagCompound()));
+
+        int[] clickedArray = new int[ElectronicPadData.ENTRIES_NB];
+        this.clickedButtonsTimeouts.forEach((position, ticks) -> clickedArray[position] = ticks);
+        nbtTagCompound.setIntArray(CLICKED_LIST_NBT, clickedArray);
 
         return new SPacketUpdateTileEntity(this.getPos(), 1, nbtTagCompound);
     }
@@ -196,6 +224,11 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
     public String getComputerName()
     {
         return PERIPHERAL_NAME;
+    }
+
+    public boolean isClicked(int index)
+    {
+        return this.clickedButtonsTimeouts.containsKey(index);
     }
 
     @SuppressWarnings({ "unused" })

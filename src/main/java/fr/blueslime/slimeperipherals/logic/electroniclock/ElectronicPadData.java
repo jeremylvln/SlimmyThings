@@ -1,6 +1,7 @@
 package fr.blueslime.slimeperipherals.logic.electroniclock;
 
 import fr.blueslime.slimeperipherals.block.BlockMagneticCardReader;
+import fr.blueslime.slimeperipherals.tileentity.TileEntityElectronicLock;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
@@ -42,10 +43,10 @@ public class ElectronicPadData implements INBTSerializable<NBTTagList>
     }
 
     @SideOnly(Side.CLIENT)
-    public void render(double x, double y, double z, BlockMagneticCardReader.EnumOrientation orientation)
+    public void render(TileEntityElectronicLock te, double x, double y, double z)
     {
         for (int i = 0; i < ENTRIES_NB; i += 1)
-            this.entries[i].render(x, y, z, orientation);
+            this.entries[i].render(x, y, z, te.getOrientation(), te.isClicked(i));
     }
 
     @Override

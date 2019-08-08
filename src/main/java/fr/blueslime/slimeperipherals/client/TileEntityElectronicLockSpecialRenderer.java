@@ -18,7 +18,7 @@ public class TileEntityElectronicLockSpecialRenderer extends TileEntitySpecialRe
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
         if (te.getPadData() != null)
-            te.getPadData().render(x, y, z, te.getOrientation());
+            te.getPadData().render(te, x, y, z);
     }
 
     private void showEntriesCollisionBoxes(TileEntityElectronicLock te, float partialTicks)
