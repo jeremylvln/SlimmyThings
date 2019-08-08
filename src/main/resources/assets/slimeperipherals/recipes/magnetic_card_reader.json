@@ -3,20 +3,24 @@
   "pattern": [
     "ITI",
     "IRI",
-    "III"
+    "ICI"
   ],
   "key": {
-    "T": {
-      "item": "minecraft:redstone_torch",
-      "data": 0
-    },
     "I": {
       "item": "minecraft:iron_ingot",
+      "data": 0
+    },
+    "T": {
+      "item": "minecraft:iron_trapdoor",
       "data": 0
     },
     "R": {
       "item": "minecraft:redstone",
       "data": 0
+    },
+    "C": {
+      "item": "opencomputers:material",
+      "data": 8
     }
   },
   "result": {

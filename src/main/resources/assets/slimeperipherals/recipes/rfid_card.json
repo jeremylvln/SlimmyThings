@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "RRR",
-    "PPP",
+    "PCP",
     "RRR"
   ],
   "key": {
@@ -13,6 +13,10 @@
     "R": {
       "item": "minecraft:redstone",
       "data": 0
+    },
+    "C": {
+      "item": "opencomputers:material",
+      "data": 4
     }
   },
   "result": {
