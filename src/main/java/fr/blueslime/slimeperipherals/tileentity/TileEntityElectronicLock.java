@@ -92,6 +92,13 @@ public class TileEntityElectronicLock extends TileEntityPeripheral
         this.world.notifyBlockUpdate(this.pos, blockState, blockState, 2);
     }
 
+    public void onBlockBreak()
+    {
+        if (!this.pad.isEmpty())
+            InventoryHelper.spawnItemStack(this.world, this.pos.getX() + 0.5D, this.pos.getY(), this.pos.getZ() + 0.5D, this.pad);
+        this.pad = ItemStack.EMPTY;
+    }
+
     @Override
     public void update()
     {

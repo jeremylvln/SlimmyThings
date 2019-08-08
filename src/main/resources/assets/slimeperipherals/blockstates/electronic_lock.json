@@ -25,7 +25,7 @@
           "red": "slimeperipherals:colors/gray"
         }
       },
-      "granted": {
+      "waiting_input": {
         "model": "slimeperipherals:electronic_lock",
         "textures": {
           "green": "slimeperipherals:colors/green",

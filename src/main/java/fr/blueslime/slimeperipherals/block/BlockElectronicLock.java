@@ -74,6 +74,17 @@ public class BlockElectronicLock extends BlockPeripheral
     }
 
     @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+
+        if (!worldIn.isRemote && tileEntity instanceof TileEntityElectronicLock)
+            ((TileEntityElectronicLock) tileEntity).onBlockBreak();
+
+        super.breakBlock(worldIn, pos, state);
+    }
+
+    @Override
     public TileEntity createTileEntity(World world, IBlockState state)
     {
         return new TileEntityElectronicLock();
