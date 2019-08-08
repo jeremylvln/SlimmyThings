@@ -3,11 +3,11 @@
   "ingredients": [
     {
       "item": "slimeperipherals:magnetic_card",
-      "data": 0
+      "data": 12
     },
     {
-      "item": "minecraft:dye",
-      "data": 15
+      "item": "minecraft:water_bucket",
+      "data": 0
     }
   ],
   "result": {

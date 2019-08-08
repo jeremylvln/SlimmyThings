@@ -3,11 +3,12 @@
   "ingredients": [
     {
       "item": "slimeperipherals:rfid_card",
-      "data": 0
+      "data": 4
+      
     },
     {
-      "item": "minecraft:dye",
-      "data": 15
+      "item": "minecraft:water_bucket",
+      "data": 0
     }
   ],
   "result": {

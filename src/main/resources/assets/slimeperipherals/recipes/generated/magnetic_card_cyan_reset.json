@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "slimeperipherals:magnetic_card",
+      "data": 9
+    },
+    {
+      "item": "minecraft:water_bucket",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "slimeperipherals:magnetic_card",
+    "data": 0,
+    "count": 1
+  }
+}
