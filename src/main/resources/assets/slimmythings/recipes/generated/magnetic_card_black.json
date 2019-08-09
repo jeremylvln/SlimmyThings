@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "slimmythings:magnetic_card",
+      "data": 32767
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "slimmythings:magnetic_card",
+    "data": 15,
+    "count": 1
+  }
+}

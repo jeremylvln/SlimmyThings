@@ -1,0 +1,34 @@
+# ----------------------------------------
+# Creative tabs
+# ----------------------------------------
+
+itemGroup.slimmythings=Slimmy Things
+
+# ----------------------------------------
+# Blocks
+# ----------------------------------------
+
+tile.slimmythings.magnetic_card_reader.name=Magnetic Card Reader
+tile.slimmythings.rfid_antenna.name=RFID Antenna
+tile.slimmythings.rfid_writer.name=RFID Writer
+tile.slimmythings.electronic_lock.name=Electronic Lock
+tile.slimmythings.electronic_pad_designer.name=Electronic Pad Designer
+
+# ----------------------------------------
+# Items
+# ----------------------------------------
+
+item.slimmythings.magnetic_card.name=Magnetic Card
+item.slimmythings.rfid_card.name=RFID Card
+item.slimmythings.electronic_pad.name=Electronic Pad
+
+# ----------------------------------------
+# GUI related
+# ----------------------------------------
+
+container.slimmythings.electronic_pad_designer=Electronic Pad Designer
+
+# ----------------------------------------
+# Peripheral related
+# ----------------------------------------
+slimmythings.peripheral.access_refused=You don't have the permission to modify this peripheral.

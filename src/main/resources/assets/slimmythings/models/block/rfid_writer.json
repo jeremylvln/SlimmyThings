@@ -1,0 +1,90 @@
+{
+	"__comment": "Designed by IamBlueSlime with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "minecraft:blocks/iron_block",
+		"rfid_writer": "slimmythings:blocks/rfid_writer",
+		"green": "slimmythings:colors/green",
+		"orange": "slimmythings:colors/orange"
+	},
+	"elements": [
+		{
+			"__comment": "Base",
+			"from": [ 5, 0, 4 ],
+			"to": [ 11, 1.5, 12 ],
+			"faces": {
+				"down": { "uv": [ 0, 12, 3, 16 ], "texture": "#rfid_writer" },
+				"up": { "uv": [ 3, 12, 6, 16 ], "texture": "#rfid_writer" },
+				"north": { "uv": [ 0, 9, 3, 9.5 ], "texture": "#rfid_writer" },
+				"south": { "uv": [ 3, 9, 6, 9.5 ], "texture": "#rfid_writer" },
+				"west": { "uv": [ 0, 9.5, 4, 10 ], "texture": "#rfid_writer" },
+				"east": { "uv": [ 4, 9.5, 8, 10 ], "texture": "#rfid_writer" }
+			}
+		},
+		{
+			"__comment": "Green LED",
+			"from": [ 9, 2, 10 ],
+			"to": [ 10, 2.5, 11 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#green" }
+			}
+		},
+		{
+			"__comment": "Orange LED",
+			"from": [ 7.5, 2, 10 ],
+			"to": [ 8.5, 2.5, 11 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#orange" }
+			}
+		},
+		{
+			"__comment": "Top 1",
+			"from": [ 5, 1.5, 8 ],
+			"to": [ 11, 2, 12 ],
+			"faces": {
+				"down": { "uv": [ 0, 10, 3, 12 ], "texture": "#rfid_writer" },
+				"up": { "uv": [ 3, 10, 6, 12 ], "texture": "#rfid_writer" },
+				"north": { "uv": [ 0, 8.5, 3, 9 ], "texture": "#rfid_writer" },
+				"south": { "uv": [ 3, 8.5, 6, 9 ], "texture": "#rfid_writer" },
+				"west": { "uv": [ 6, 15.5, 8, 16 ], "texture": "#rfid_writer" },
+				"east": { "uv": [ 6, 15, 8, 15.5 ], "texture": "#rfid_writer" }
+			}
+		},
+		{
+			"__comment": "Top 2",
+			"from": [ 5, 1.5, 4 ],
+			"to": [ 11, 2, 5 ],
+			"faces": {
+				"down": { "uv": [ 0, 8, 3, 8.5 ], "texture": "#rfid_writer" },
+				"up": { "uv": [ 3, 8, 6, 8.5 ], "texture": "#rfid_writer" },
+				"north": { "uv": [ 0, 7.5, 3, 8 ], "texture": "#rfid_writer" },
+				"south": { "uv": [ 3, 7.5, 6, 8 ], "texture": "#rfid_writer" },
+				"west": { "uv": [ 6, 11.5, 6.5, 12 ], "texture": "#rfid_writer" },
+				"east": { "uv": [ 6.5, 11.5, 7, 12 ], "texture": "#rfid_writer" }
+			}
+		},
+		{
+			"__comment": "Top3",
+			"from": [ 10, 1.5, 5 ],
+			"to": [ 11, 2, 8 ],
+			"faces": {
+				"down": { "uv": [ 6, 13.5, 6.5, 15 ], "texture": "#rfid_writer" },
+				"up": { "uv": [ 6.5, 13.5, 7, 15 ], "texture": "#rfid_writer" },
+				"north": { "uv": [ 7, 11.5, 7.5, 12 ], "texture": "#rfid_writer" },
+				"south": { "uv": [ 7.5, 11.5, 8, 12 ], "texture": "#rfid_writer" },
+				"west": { "uv": [ 6, 13, 7.5, 13.5 ], "texture": "#rfid_writer" },
+				"east": { "uv": [ 6, 12.5, 7.5, 13 ], "texture": "#rfid_writer" }
+			}
+		}
+	]
+}

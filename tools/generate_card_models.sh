@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT="../src/main/resources/assets/slimeperipherals"
+ROOT="../src/main/resources/assets/slimmythings"
 
 for file in $ROOT/textures/items/*_card_*.png; do
 	base=$(basename $file)
@@ -9,7 +9,7 @@ for file in $ROOT/textures/items/*_card_*.png; do
 {
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "slimeperipherals:items/$name"
+		"layer0": "slimmythings:items/$name"
 	}
 }
 EOF

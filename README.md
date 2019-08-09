@@ -1,4 +1,4 @@
-# Slime Peripherals [![Build Status](https://img.shields.io/jenkins/s/https/ci.jeremylvln.fr/job/Slime%20Peripherals.svg?style=flat-square)](https://ci.jeremylvln.fr/job/Slime%20Peripherals/) [![CurseForge Downloads](http://cf.way2muchnoise.eu/full_328259_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/slime-peripherals) [![Minecraft Versions](http://cf.way2muchnoise.eu/versions/328259.svg)](https://www.curseforge.com/minecraft/mc-mods/slime-peripherals)
+# Slimmy Things [![Build Status](https://img.shields.io/jenkins/s/https/ci.jeremylvln.fr/job/SlimmyThings.svg?style=flat-square)](https://ci.jeremylvln.fr/job/SlimmyThings/) [![CurseForge Downloads](http://cf.way2muchnoise.eu/full_328259_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/slimmy-things) [![Minecraft Versions](http://cf.way2muchnoise.eu/versions/328259.svg)](https://www.curseforge.com/minecraft/mc-mods/slimmy-things)
 
 
 ![Overview](.github/overview.png)
@@ -9,20 +9,25 @@
 
 ## Introduction
 
-*An add-on for OpenComputers that provides new peripherals.*
+*A mod for Minecraft that adds all I think the game is missing.*
 
-See the [*wiki*](https://github.com/IamBlueSlime/SlimePeripherals/wiki) for usage example and API explanations.
+See the [*wiki*](https://github.com/IamBlueSlime/SlimmyThings/wiki) for usage example and API explanations.
 
 
 ### Magnetic cards
 
-The *magnetic cards* or *mag cards* are simply a card which contains a data. By swiping the card into a
+The **Magnetic Cards** are simply a card which contains a data. By swiping the card into a
 **Magnetic Card Reader**, you can access the data.
 
 ### RFID cards
 
-The *RFID cards* are cards which can be detected around a **RFID Antenna**. To write a card, you'll need a
+The **RFID Cards** are cards which can be detected around a **RFID Antenna**. To write a card, you'll need a
 **RFID Writer**.
+
+### Electronic Lock
+
+The **Electronic Lock** permits to create a combination-lock using items as icons. An **Electronic Pad**
+must be designed using the **Electronic Pad Designer** and then placed inside the **Electronic Lock**.
 
 
 ## License

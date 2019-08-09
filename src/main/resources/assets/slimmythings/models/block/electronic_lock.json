@@ -1,0 +1,51 @@
+{
+	"__comment": "Designed by IamBlueSlime with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "minecraft:blocks/iron_block",
+		"electronic_lock": "slimmythings:blocks/electronic_lock",
+		"green": "slimmythings:colors/green",
+		"red": "slimmythings:colors/red"
+	},
+	"elements": [
+		{
+			"__comment": "Base",
+			"from": [ 5, 0, 4 ],
+			"to": [ 11, 2, 13 ],
+			"faces": {
+				"down": { "uv": [ 0, 7, 6, 16 ], "texture": "#electronic_lock" },
+				"up": { "uv": [ 6, 7, 12, 16 ], "texture": "#electronic_lock" },
+				"north": { "uv": [ 0, 5, 6, 7 ], "texture": "#electronic_lock" },
+				"south": { "uv": [ 0, 3, 6, 5 ], "texture": "#electronic_lock" },
+				"west": { "uv": [ 6, 5, 15, 7 ], "texture": "#electronic_lock" },
+				"east": { "uv": [ 6, 3, 15, 5 ], "texture": "#electronic_lock" }
+			}
+		},
+		{
+			"__comment": "Green LED",
+			"from": [ 8.5, 2, 11.5 ],
+			"to": [ 9, 2.5, 12 ],
+			"faces": {
+				"down": { "uv": [ 10, 0, 11, 1 ], "texture": "#green" },
+				"up": { "uv": [ 11, 2, 12, 3 ], "texture": "#green" },
+				"north": { "uv": [ 11, 1, 12, 2 ], "texture": "#green" },
+				"south": { "uv": [ 11, 0, 12, 1 ], "texture": "#green" },
+				"west": { "uv": [ 12, 2, 13, 3 ], "texture": "#green" },
+				"east": { "uv": [ 12, 1, 13, 2 ], "texture": "#green" }
+			}
+		},
+		{
+			"__comment": "Red LED",
+			"from": [ 7, 2, 11.5 ],
+			"to": [ 7.5, 2.5, 12 ],
+			"faces": {
+				"down": { "uv": [ 12, 0, 13, 1 ], "texture": "#red" },
+				"up": { "uv": [ 13, 2, 14, 3 ], "texture": "#red" },
+				"north": { "uv": [ 14, 2, 15, 3 ], "texture": "#red" },
+				"south": { "uv": [ 15, 2, 16, 3 ], "texture": "#red" },
+				"west": { "uv": [ 13, 1, 14, 2 ], "texture": "#red" },
+				"east": { "uv": [ 13, 0, 14, 1 ], "texture": "#red" }
+			}
+		}
+	]
+}

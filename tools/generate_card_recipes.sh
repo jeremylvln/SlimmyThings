@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT="../src/main/resources/assets/slimeperipherals"
+ROOT="../src/main/resources/assets/slimmythings"
 OUTPUT="$ROOT/recipes/generated"
 
 colors=(white orange magenta lightblue yellow lime pink gray silver cyan purple blue brown green red black)
@@ -16,7 +16,7 @@ for (( i=1; i<$len; i++ )); do
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "slimeperipherals:magnetic_card",
+      "item": "slimmythings:magnetic_card",
       "data": 32767
     },
     {
@@ -25,7 +25,7 @@ for (( i=1; i<$len; i++ )); do
     }
   ],
   "result": {
-    "item": "slimeperipherals:magnetic_card",
+    "item": "slimmythings:magnetic_card",
     "data": ${data_dest[$i]},
     "count": 1
   }
@@ -44,7 +44,7 @@ for (( i=1; i<$len; i++ )); do
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "slimeperipherals:rfid_card",
+      "item": "slimmythings:rfid_card",
       "data": 32767
     },
     {
@@ -53,7 +53,7 @@ for (( i=1; i<$len; i++ )); do
     }
   ],
   "result": {
-    "item": "slimeperipherals:rfid_card",
+    "item": "slimmythings:rfid_card",
     "data": ${data_dest[$i]},
     "count": 1
   }

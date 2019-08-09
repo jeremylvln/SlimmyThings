@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "opencomputers:material",
+      "data": 14
+    }
+  },
+  "result": {
+    "item": "slimmythings:electronic_pad",
+    "data": 0,
+    "count": 1
+  }
+}

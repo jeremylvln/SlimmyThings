@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:paper",
+      "data": 0
+    },
+    "C": {
+      "item": "opencomputers:material",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "slimmythings:magnetic_card",
+    "data": 0,
+    "count": 1
+  }
+}

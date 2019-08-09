@@ -1,8 +1,8 @@
 [
 {
-  "modid": "slimeperipherals",
-  "name": "Slime Peripherals",
-  "description": "An add-on for OpenComputers that provides new peripherals.",
+  "modid": "slimmythings",
+  "name": "Slimmy Things",
+  "description": "A mod for Minecraft that adds all I think the game is missing.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

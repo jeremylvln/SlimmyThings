@@ -1,0 +1,78 @@
+{
+  "forge_marker": 1,
+
+  "variants": {
+    "facing": {
+      "up_north": { "y": 180 },
+      "up_east": { "y": 270 },
+      "up_south": {},
+      "up_west": { "y": 90 },
+      "north": { "x": 90 },
+      "east": { "x": 90, "y": 90 },
+      "south": { "x": 90, "y": 180 },
+      "west": { "x": 90, "y": 270 },
+      "down_north": { "x": 180, "y": 180 },
+      "down_east": { "x": 180, "y": 270 },
+      "down_south": { "x": 180  },
+      "down_west": { "x": 180, "y": 90 }
+    },
+
+    "state": {
+      "idle": {
+        "model": "slimmythings:rfid_writer",
+        "textures": {
+          "green": "slimmythings:colors/gray",
+          "orange": "slimmythings:colors/gray"
+        }
+      },
+      "waiting_card": {
+        "model": "slimmythings:rfid_writer",
+        "textures": {
+          "green": "slimmythings:colors/green_blink",
+          "orange": "slimmythings:colors/gray"
+        }
+      },
+      "busy": {
+        "model": "slimmythings:rfid_writer",
+        "textures": {
+          "green": "slimmythings:colors/gray",
+          "orange": "slimmythings:colors/orange"
+        }
+      }
+    },
+
+    "filled": {
+      "true": {},
+      "false": {}
+    },
+
+    "inventory": [
+      {
+        "model": "slimmythings:rfid_writer",
+        "transform": {
+          "thirdperson_righthand": {
+            "rotation":  [ 91, 180, 0 ],
+            "translation":  [ 0, 2.7831, 0 ]
+          },
+          "thirdperson_lefthand": {
+            "rotation":  [ 91, 180, 0 ],
+            "translation":  [ 0, 2.7831, 0 ]
+          },
+          "firstperson_righthand": {
+            "rotation":  [ 75, 180, 0 ]
+          },
+          "firstperson_lefthand": {
+            "rotation":  [ 75, 180, 0 ]
+          },
+          "gui": {
+            "rotation":  [ 90, 180, 0 ]
+          },
+          "fixed": {
+            "rotation":  [ -90, 0, 0 ],
+            "translation":  [ 0, 0, -0.4 ]
+          }
+        }
+      }
+    ]
+  }
+}

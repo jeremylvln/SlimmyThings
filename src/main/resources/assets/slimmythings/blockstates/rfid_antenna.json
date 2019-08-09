@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+
+  "variants": {
+    "normal": {
+      "model": "slimmythings:rfid_antenna"
+    },
+    "inventory": {
+      "model": "slimmythings:rfid_antenna"
+    }
+  }
+}

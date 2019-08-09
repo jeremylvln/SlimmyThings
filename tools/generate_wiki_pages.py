@@ -12,7 +12,7 @@ import tqdm
 
 
 ROOT_PATH = "wiki"
-GIT_REPOSITORY = "git@github.com:IamBlueSlime/SlimePeripherals.wiki.git"
+GIT_REPOSITORY = "git@github.com:IamBlueSlime/SlimmyThings.wiki.git"
 GIT_REPOSITORY_PATH = ROOT_PATH + os.sep + ".tmp_wiki.git"
 
 
